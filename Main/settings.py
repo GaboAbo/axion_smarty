@@ -5,17 +5,10 @@ from pathlib import Path
 import logging
 
 
-print(">>> settings.py loaded")  # TEMP: remove later
-print(">>> ENV VARS >>>")
-for key, value in os.environ.items():
-    print(f"{key}={value}")
-print("<<< END ENV VARS <<<")
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
-    logging.warning("DJANGO_SECRET_KEY not found in environment variables.")
     raise ValueError("DJANGO_SECRET_KEY is not set! Check your environment variables.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
