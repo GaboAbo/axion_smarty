@@ -1,0 +1,42 @@
+{% load static %}
+
+<form
+    id="create_or_edit_order"
+    class="w-1/2 p-4 flex flex-col gap-2 bg-slate-50/50 rounded-sm justify-center items-center text-sm"
+    hx-post="{% url "updateOrder" order_pk %}"
+    hx-target="#create_or_edit_order"
+    hx-swap="outerHTML transition:true"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <p class="text-xl">Editar Orden de trabajo</p>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Cliente</p>
+        {{ form.client }}
+    </div>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Contrato</p>
+        {{ form.contract }}
+    </div>
+    <div id="devices" class="w-full h-[240px] flex flex-row">
+        <p class="w-1/4">Equipos</p>
+        {{ form.device }}
+    </div>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Estado</p>
+        {{ form.status }}
+    </div>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Ingeniero</p>
+        {{ form.engineer }}
+    </div>
+    <input
+        class="w-full h-[22px] bg-green-500 hover:bg-green-600 duration-300 text-white text-sm"
+        type="submit"
+        value="Actualizar Orden">
+    <button
+        class="w-full h-[22px] bg-slate-500 hover:bg-slate-600 duration-300 text-white text-sm"
+        hx-get="{% url "getAllOrders" %}"
+        hx-target="#create_or_edit_order"
+        hx-swap="outerHTML transition:true">
+        Volver a ordenes
+    </button>
+</form>

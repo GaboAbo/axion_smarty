@@ -1,0 +1,312 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Generator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            @page {
+                margin-top: 1cm;
+                margin-bottom: 0cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+            }
+            html {
+                font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                color: rgb(30 41 59);
+            }
+            body {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+            td, tr, th {
+                font-size: 6px;
+                border: 1px solid rgb(30 41 59);
+                border-collapse: collapse;
+                text-align: left;
+                vertical-align: middle;
+            }
+            p {
+                margin: 0;
+                padding-left: 4px;
+                font-size: 6px;
+            }
+            .table {
+                width: 100%;
+                border: 1px solid rgb(30 41 59);
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+            .table.container {
+                width: 100%;
+                border: 1px solid rgb(30 41 59);
+                padding: 0;
+            }
+            .inner-table {
+                width: 102.5%;
+                border: none;
+                border-collapse: collapse;
+                margin: -2px;
+                table-layout: fixed;
+            }
+            .full {
+                width: 100%;
+                border: 1px solid rgb(30 41 59);
+            }
+            .center {
+                width: 50%;
+                border: 1px solid rgb(30 41 59);
+            }
+            .side {
+                width: 25%;
+                border: 1px solid rgb(30 41 59);
+            }
+            .border-b {
+                border-style: none none solid none;
+            }
+            .no-border {
+                border: none;
+            }
+            .text-center {
+                text-align: center;
+            }
+            .text-title {
+                font-size: 8px;
+            }
+            .text-status {
+                font-size: 8px;
+            }
+            .font-normal {
+                font-weight: normal;
+            }
+            .font-semibold {
+                font-weight: 600;
+            }
+            .font-bold {
+                font-weight: bold;
+            }
+            .container {
+                display: grid;
+                row-gap: 4px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+            .container.container-1 {
+                grid-template-columns: 100%;
+            }
+            .container.container-2 {
+                grid-template-columns: 50% 50%;
+            }
+            .container.container-3 {
+                grid-template-columns: 33.333333% 33.333333% 33.333333%;
+            }
+            .flex-row {
+                display: flex;
+                flex-direction: row;
+            }
+            .w-1\/2 {
+                width: 50%;
+            }
+            .w-1\/3 {
+                width: 33.333333%;
+            }
+            .w-full {
+                width: 100%;
+            }
+            .footer {
+                position: absolute;
+                width: 100%;
+                height: 2.5cm;
+                bottom: 1cm;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+            .fit-image {
+                width: 62%;
+                object-fit: contain;
+                padding: 0 19%;
+            }
+            .mt-4 {
+                margin-top: 4px;
+            }
+            .mt-8 {
+                margin-top: 12px;
+            }
+            .textbox {
+                padding-left: 4px;
+                padding-right: 4px;
+            }
+        </style>
+    </head>
+    <body>
+    {% for protocol in protocols %}
+        <table id="header" class="table font-bold">
+            <tr>
+                <td class="side">
+                    <img src={{ logo }} alt="Olympus Logo" class="fit-image">
+                </td>
+                <td class="center text-center text-title">
+                    PROTOCOLO DE INSPECCION<br />{{ protocol.device.device_model.get_device_type_display|upper }}
+                </td>
+                <td class="table-container">
+                    <table class="inner-table">
+                        <tr class="full">
+                            <td>Versión</td>
+                            <td class="font-normal">1.0.0</td>
+                        </tr>
+                        <tr class="full">
+                            <td>Fecha</td>
+                            <td class="font-normal">Mar. 14, 2024</td>
+                        </tr>
+                        <tr class="full">
+                            <td colspan="2">
+                                Pág. {{ forloop.counter }} de {{ protocols|length }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table id="info" class="table font-bold mt-8">
+            <tr>
+                <td colspan="3">CLIENTE: <span class="font-normal">{{ order.client.name }}</span></td>
+                <td colspan="3">DIRECCIÓN: <span class="font-normal">{{ order.client.address }}</span> </td>
+            </tr>
+            <tr>
+                <td colspan="2">MODELO: <span class="font-normal">{{ protocol.device.device_model.part_number }}</span></td>
+                <td colspan="2">SERIE: <span class="font-normal">{{ protocol.device.serial_number }}</span></td>
+                <td colspan="2">FECHA: <span class="font-normal">{{ order.created_at }}</span></td>
+            </tr>
+            <tr>
+                <td colspan="2">UBICACIÓN: <span class="font-normal">{{ protocol.location }}</span></td>
+                <td colspan="2">ING. POST VENTA: <span class="font-normal">{{ order.engineer.last_name }} {{ order.engineer.first_name }}</span></td>
+                <td colspan="2">TIPO DE MANTENIMIENTO: 
+                    <span class="font-normal">
+                    {% if protocol.device.contract %}
+                    {{ protocol.device.contract.get_contract_type_display }}
+                    {% else %}
+                    Post venta
+                    {% endif %}
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <table id="checklist" class="table font-bold mt-8">
+            <tr>
+                <td class="text-center" colspan="20">INSPECCIÓN GENERAL</td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="1">No.</td>
+                <td class="text-center" colspan="4">Inspección</td>
+                <td class="text-center" colspan="1">Ok</td>
+                <td class="text-center" colspan="1">No Critico</td>
+                <td class="text-center" colspan="1">Crítico</td>
+                <td class="text-center" colspan="1">N/a</td>
+                <td class="text-center" colspan="7">Detalles</td>
+                <td class="text-center" colspan="4">Observaciones</td>
+            </tr>
+            {% for element in protocol.fields %}
+            <tr class="font-normal">
+                <td class="text-center" colspan="1">{{ forloop.counter }}</td>
+                <td colspan="4" class="textbox">{{ element.0.name }}</td>
+
+                <td class="text-center text-status" colspan="1">{% if element.0.value == "OK" %}X{% endif %}</td>
+                <td class="text-center text-status" colspan="1">{% if element.0.value == "NC" %}X{% endif %}</td>
+                <td class="text-center text-status" colspan="1">{% if element.0.value == "CT" %}X{% endif %}</td>
+                <td class="text-center text-status" colspan="1">{% if element.0.value == "NA" %}X{% endif %}</td>
+            
+                <td colspan="7">
+                    <div class="container {% if element|length == 2 %}container-1{% else %}container-2{% endif %}">
+                        {% for item in element %}
+                            {% if item.field == "boolean" %}
+                                <div class="flex-row">
+                                    <p>{% if item.value %}■{% else %}□{% endif %}</p>
+                                    <p> {{ item.name }}</p>
+                                </div>
+                            {% elif item.field == "text" or item.field == "number" %}
+                                <div class="flex-row"><p>{{ item.name }}</p><p> [{{ item.value }}]</p></div>
+                            {% elif item.field == "fill" %}
+                                <div class="flex-row"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </td>
+                {% with element|last as last_item %}
+                    {% if last_item.field == "area" %}
+                    <td colspan="4" class="textbox">
+                    {% if last_item.value %}
+                    {{ last_item.value }}
+                    {% else %}
+                    Sin observaciones
+                    {% endif %}
+                    </td>
+                    {% endif %}
+                {% endwith %}
+            </tr>
+            {% endfor %}
+        </table>
+        <table id="comments" class="table font-semibold mt-8">
+            <tr>
+                <td colspan="3">Comentarios: <span class="font-normal">{{ protocol.get_status_display }}</span></td>
+            </tr>
+        </table>
+        <div class="footer">
+            <table id="agreements" class="table no-border mt-8">
+                <tr class="no-border">
+                    <td class="no-border"></td>
+                    <td class="text-center border-b" colspan="2">{{ order.engineer.last_name }} {{ order.engineer.first_name }}</td>
+                    <td class="no-border"></td>
+                    <td class="text-center border-b" colspan="2">{{ order.client_personal_name }}</td>
+                    <td class="no-border"></td>
+                </tr>
+                <tr class="no-border font-semibold">
+                    <td class="no-border"></td>
+                    <td class="text-center no-border" colspan="2">Nombre Ing. Post Venta</td>
+                    <td class="no-border"></td>
+                    <td class="text-center no-border" colspan="2">Nombre Cliente</td>
+                    <td class="no-border"></td>
+                </tr>
+            </table>
+            <table id="signature" class="table no-border">
+                <tr class="no-border">
+                    <td class="no-border"></td>
+                    <td class="text-center border-b" colspan="2">
+                        <img src={{ engineer.signature }} alt="engineer_signature" style="width:30px;height:30px;">
+                    </td>
+                    <td class="no-border"></td>
+                    <td class="text-center border-b" colspan="2">
+                        <img src={{ order.client_sign }} alt="client_signature" style="width:30px;height:30px;">
+                    </td>
+                    <td class="no-border"></td>
+                </tr>
+                <tr class="no-border font-semibold">
+                    <td class="no-border"></td>
+                    <td class="text-center no-border" colspan="2">Firma Ing. Post Venta</td>
+                    <td class="no-border"></td>
+                    <td class="text-center no-border" colspan="2">Firma Cliente</td>
+                    <td class="no-border"></td>
+                </tr>
+            </table>
+            <table id="footer" class="table mt-8">
+                <tr class="font-bold">
+                    <td class="text-center">Realizado por</td>
+                    <td class="text-center">Revisado por</td>
+                    <td class="text-center">Aprobado por</td>
+                </tr>
+                <tr class="font-normal">
+                    <td class="text-center">X</td>
+                    <td class="text-center">X</td>
+                    <td class="text-center">X</td>
+                </tr>
+            </table>
+        </div>
+        <div class="page-break"></div>
+    {% endfor %}
+    </body>
+</html>

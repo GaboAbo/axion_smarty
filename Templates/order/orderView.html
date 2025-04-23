@@ -1,0 +1,59 @@
+{% load static %}
+
+<div id="order_view" class="w-[1180px] h-[620px]">
+    <div class="w-full h-[30px] mb-[10px] bg-slate-50 flex justify-center text-xl font-bold">
+        <p>Detalle de Orden #{{ order.pk }}</p>
+    </div>
+    <div class="w-full h-[90px] mb-[10px] bg-slate-50 flex flex-row">
+        <div class="w-full h-full grid grid-cols-6 p-4 gap-x-4">
+            <div class="h-[24px] px-2 text-sm col-span-4"><b>Cliente</b>: {{ order.client.name }}</div>
+            <div class="h-[24px] px-2 text-sm"><b>Estado</b>: {{ order.get_status_display }}</div>
+            <div class="h-[24px] px-2 text-sm col-span-4"><b>Ingeniero</b>: {{ order.engineer }}</div>
+            <div class="h-[24px] px-2 text-sm"><b>Fecha</b>: {{ order.created_at }}</div>
+            <div class="flex flex-row justify-around items-center row-start-1 row-span-2 col-start-6">
+                <a href="{% url "generatePdf" order.pk %}">
+                    <button
+                        class="w-[32px] h-[32px] flex justify-center rounded-sm bg-slate-200 hover:bg-slate-500 duration-300"
+                        type="button">
+                        <img src="{% static "icons/pdf.svg" %}" width="30" height="30" alt="generate_pdf" />
+                    </button>
+                </a>
+                <button
+                    hx-get="{% url "updateOrder" order.pk %}"
+                    hx-target="#order_view"
+                    hx-swap="outerHTML transition:true"
+                    class="w-[32px] h-[32px] flex justify-center rounded-sm bg-slate-200 hover:bg-blue-500 duration-300"
+                    type="button">
+                    <img src="{% static "icons/edit.svg" %}" width="30" height="30" alt="edit" />
+                </button>
+                <button
+                    hx-get="{% url "deleteOrder" order.pk %}"
+                    hx-confirm="Esta seguro de que desea eliminar la order {{ order.pk }}?"
+                    hx-target="#order_view"
+                    hx-swap="innerHTML transition:true"
+                    class="w-[32px] h-[32px] flex justify-center rounded-sm bg-slate-200 hover:bg-red-500  duration-300"
+                    type="button">
+                    <img src="{% static "icons/delete.svg" %}" width="30" height="30" alt="delete" />
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="w-full h-[480px] bg-slate-50 overflow-y-scroll">
+        <table id="device_table" class="table-auto w-full h-full text-sm">
+            <thead class="sticky top-0 bg-slate-50">
+                <tr class="h-[68px]">
+                    <th style="width:393px">MODELO</th>
+                    <th style="width:393px">SERIE</th>
+                    <th style="width:393px">ESTADO</th>
+                </tr>
+            </thead>
+            <tbody
+                id="table_data"
+                class="text-center text-sm"
+                hx-get="{% url "protocolsByOrder" order.pk %}"
+                hx-trigger="load"
+                hx-swap="innerHTML">
+            </tbody>
+        </table>
+    </div>
+</div>

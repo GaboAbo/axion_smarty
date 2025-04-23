@@ -1,0 +1,86 @@
+{% load static %}
+
+<div id="order_list" class="w-[1180px] flex flex-col">
+    <div class="basic-container w-full h-[30px] mb-[10px] bg-slate-50 text-xl font-bold"><p>Listado de Ordenes</p></div>
+    <div class="w-full h-[90px] mb-[10px] bg-slate-50 flex flex-row">
+        <form
+            id="filter"
+            class="w-11/12 h-full grid grid-cols-5 p-4 gap-x-4 gap-y-1"
+            hx-get="{% url "filterOrder" %}"
+            hx-trigger="change delay:250ms"
+            hx-target="#table_data"
+            hx-swap="innerHTML"
+            hx-include="this">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="id"
+                placeholder="Buscar por ID">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="client"
+                placeholder="Buscar por Cliente">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="exec_date"
+                type="date">
+            <select name="engineer" class="h-[24px] focus:outline-none focus:border-slate-700 text-sm">
+                <option value="" class="text-sm">Todos los Ingenieros</option>
+                <option value=1 class="text-sm">Mendoza Robert</option>
+            </select>
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="model"
+                placeholder="Buscar por Modelo">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="serial"
+                placeholder="Buscar por Serie">
+            <select name="status" class="col-start-4 h-[24px] focus:outline-none focus:border-slate-700 text-sm">
+                <option value="" class="text-sm">Todos los Estados</option>
+                <option value="PR" class="text-slate-600 text-sm">Programada</option>
+                <option value="CT" class="text-green-600 text-sm">Completada</option>
+                <option value="AT" class="text-orange-600 text-sm">Atrasada</option>
+            </select>
+            <input
+                class="row-start-1 col-start-5 ml-[148px] w-[58px] row-span-2 rounded-sm bg-slate-200 hover:bg-slate-500 duration-150 text-white text-5xl"
+                hx-get="{% url "filterOrder" %}"
+                hx-trigger="click delay:250ms"
+                hx-target="#table_data"
+                hx-swap="innerHTML"
+                type="reset"
+                value="↺">
+        </form>
+        <div class="w-1/12 h-full p-4 gap-y-1">
+            <button
+                class="w-[58px] h-[58px] flex justify-center rounded-sm bg-slate-200 hover:bg-green-500 duration-150 text-white text-sm"
+                hx-get="{% url "createOrder" %}"
+                hx-target="#order_list"
+                hx-swap="outerHTML transition:true"
+                type="button">
+                <img src="{% static "icons/add.svg" %}" width="48" height="48" alt="add" />
+            </button>
+        </div>
+    </div>
+    
+    <div class="w-full h-[430px] overflow-y-scroll">
+        <table id="order_table" class="table-auto w-full h-full text-sm">
+            <thead class="sticky top-0 bg-slate-50">
+                <tr class="h-[68px]">
+                    <th style="width:60px">ID</th>
+                    <th style="width:532px">Cliente</th>
+                    <th style="width:200px">Ingeniero</th>
+                    <th style="width:100px">Fecha</th>
+                    <th style="width:160px">Estado</th>
+                    <th style="width:148px">Acciones</th>
+                </tr>
+            </thead>
+            <tbody
+                id="table_data"
+                class="text-center text-sm"
+                hx-get="{% url "filterOrder" %}"
+                hx-trigger="load"
+                hx-swap="innerHTML">
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% load static %}
+
+<div id="device_list" class="w-[1180px] flex flex-col">
+    <div class="w-[1180px] h-[30px] mb-[10px] bg-slate-50 flex justify-center text-xl font-bold"><p>LISTADO DE EQUIPOS</p></div>
+    <div class="w-full h-[90px] mb-[10px] bg-slate-50 flex flex-row">
+        <form
+            id="filter"
+            class="w-11/12 h-full grid grid-cols-5 p-4 gap-x-4 gap-y-1"
+            hx-get="{% url "filterDevice" %}"
+            hx-trigger="change delay:250ms"
+            hx-target="#table_data"
+            hx-swap="innerHTML"
+            hx-include="this">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="model"
+                placeholder="Buscar por Modelo">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="serial"
+                placeholder="Buscar por Serie">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="client"
+                placeholder="Buscar por Cliente">
+            <input
+                class="h-[24px] border-2 rounded-sm border-slate-300 focus:outline-none focus:border-slate-700 px-2 text-sm"
+                name="contract"
+                placeholder="Buscar por Contrato">
+            <input
+                class="row-start-1 col-start-5 ml-[148px] w-[58px] row-span-2 rounded-sm bg-slate-200 hover:bg-slate-500 duration-150 text-white text-5xl"
+                hx-get="{% url "filterDevice" %}"
+                hx-trigger="click delay:250ms"
+                hx-target="#table_data"
+                hx-swap="innerHTML"
+                type="reset"
+                value="↺">
+        </form>
+    </div>
+    
+    <div class="w-full h-[430px] overflow-y-scroll">
+        <table id="device_table" class="table-auto w-full h-full text-sm">
+            <thead class="sticky top-0 bg-slate-50">
+                <tr class="h-[68px]">
+                    <th style="width:250px">Modelo</th>
+                    <th style="width:250px">Serie</th>
+                    <th style="width:500px">Cliente</th>
+                    <th style="width:180px">Contrato</th>
+                </tr>
+            </thead>
+            <tbody
+                id="table_data"
+                class="text-center text-sm"
+                hx-get="{% url "filterDevice" %}"
+                hx-trigger="load"
+                hx-swap="innerHTML">
+            </tbody>
+        </table>
+    </div>
+</div>

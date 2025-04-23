@@ -1,0 +1,9 @@
+{% load static %}
+
+{% for protocol in protocols %}
+<tr class="h-[68px]">
+    <th class="font-normal">{{ protocol.device.device_model.part_number }}</th>
+    <th class="font-normal">{{ protocol.device.serial_number }}</th>
+    <th class="font-normal">{{ protocol.get_status_display }}</th>
+</tr>
+{% endfor %}

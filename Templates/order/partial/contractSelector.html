@@ -1,0 +1,12 @@
+{% load static %}
+
+<select name="contract" class="w-full h-full border-2 rounded-sm border-slate-500 focus:outline-none focus:border-slate-900 px-2 text-sm">
+    <option value="" selected="">Sin contrato</option>
+    {% for contract in contracts %}
+    <option
+        value="{{ contract.pk  }}"
+        class="text-sm">
+        {{ contract.number  }} - {{ contract.contract_type }}
+    </option>
+    {% endfor %}
+</select>

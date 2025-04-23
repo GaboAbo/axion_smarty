@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+{% for a in accounts %}
+<p>{{ a }}</p>
+{% endfor %}
+{% endblock %}

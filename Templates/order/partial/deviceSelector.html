@@ -1,0 +1,11 @@
+{% load static %}
+
+<select name="device" class="w-full h-full border-2 rounded-sm border-slate-500 focus:outline-none focus:border-slate-900 px-2 text-sm" multiple>
+    {% for device in devices %}
+    <option
+        value="{{ device.pk  }}"
+        class="text-sm">
+        {{ device.device_model.part_number }} - {{ device.serial_number }}
+    </option>
+    {% endfor %}
+</select>

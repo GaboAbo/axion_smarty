@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Error{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href={% static "output.css" %} rel="stylesheet">
+        <link rel="icon" href="{% static 'icons/logo.svg' %}" type="image/svg+xml">
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    </head>
+    <body class="w-full h-screen flex justify-center items-center font-roboto bg-linear-to-bl from-blue-200 via-zinc-100 to-slate-100 text-slate-700">
+        {{ message }}
+    </body>
+</html>

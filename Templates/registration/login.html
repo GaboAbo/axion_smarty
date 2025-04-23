@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Iniciar Sesion{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href={% static "output.css" %} rel="stylesheet">
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    </head>
+    <body class="w-full h-screen flex justify-center font-roboto bg-linear-to-bl from-blue-200 via-zinc-100 to-slate-100 text-slate-700">
+        <div id="menu" class="w-[1200px] h-[640px] mt-[10px] bg-white/50 flex flex-col gap-1 justify-center items-center text-lg">
+            {% if form.errors %}
+            <p>Error al ingresar credenciales. Intente de nuevo.</p>
+            {% endif %}
+            
+            <form method="POST" action="{% url 'login' %}" hx-target="#login-response" hx-swap="outerHTML">
+                {% csrf_token %}
+
+                <div class="w-[100%] flex justify-between gap-1">
+                    Usuario
+                    {{ form.username }}
+                </div>
+                <div class="w-[100%] flex justify-between gap-1">
+                    Contrasena
+                    {{ form.password }}
+                </div>
+                
+                <input
+                    class="w-[100%] h-[32px] flex justify-center items-center rounded-sm text-white bg-blue-500 hover:bg-blue-600 duration-300"
+                    type="submit" value="Ingresar">
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+            
+            <div id="login-response"></div>
+        </div>
+    </body>
+</html>
+

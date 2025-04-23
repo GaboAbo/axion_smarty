@@ -1,0 +1,31 @@
+{% load static %}
+
+{% for order in orders %}
+<tr style="height:40px; max-height:40px;" class="border-b-4 border-b-white/70 rounded-lg bg-slate-600/10 hover:bg-slate-600/20 duration-300">
+    <td>{{ order.pk }}</td>
+    <td>{{ order.client.name }}</td>
+    <td>{{ order.engineer }}</td>
+    <td>{{ order.created_at }}</td>
+    <td>
+        {% if order.status == 'PR' %}
+        <p class="text-slate-600">Programada</p>
+        {% elif order.status == 'CT' %}
+        <p class="text-green-600">Completada</p>
+        {% else %}
+        <p class="text-orange-600">Atrasada</p>
+        {% endif %}
+    </td>
+    <td>
+        <div class="flex justify-center items-center">
+            <button
+                hx-get="{% url "getOrder" order.pk %}"
+                hx-target="#order_list"
+                hx-swap="outerHTML transition:true"
+                class="w-[90%] h-[32px] flex justify-center items-center rounded-sm text-white bg-blue-500 hover:bg-blue-600 duration-300"
+                type="button">
+                Revisar
+            </button>
+        </div>
+    </td>
+</tr>
+{% endfor %}

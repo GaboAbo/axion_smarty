@@ -1,0 +1,22 @@
+{% load static %}
+
+<div id="statistics_menu" class="w-[1180px] h-[620px] bg-slate-50 flex flex-col gap-2 justify-center items-center text-xl">
+    <button
+        hx-get="{% url "orderStatus" %}"
+        hx-target="#statistics_menu"
+        hx-swap="innerHTML transition:true"
+        class="w-[300px] h-[32px] flex justify-center items-center rounded-sm text-white bg-blue-500 hover:bg-blue-600 duration-300"
+        type="button">
+        Ordenes
+    </button>
+    <button
+        class="w-[300px] h-[32px] flex justify-center items-center rounded-sm text-white bg-blue-500 hover:bg-blue-600 duration-300"
+        type="button">
+        Mantenimientos
+    </button>
+    <button
+        class="w-[300px] h-[32px] flex justify-center items-center rounded-sm text-white bg-blue-500 hover:bg-blue-600 duration-300"
+        type="button">
+        Fallas
+    </button>
+</div>

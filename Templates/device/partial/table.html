@@ -1,0 +1,10 @@
+{% load static %}
+
+{% for device in devices %}
+<tr style="height:40px; max-height:40px;" class="border-b-4 border-b-white/70 rounded-sm bg-slate-600/10 hover:bg-slate-600/20 duration-300">
+    <td>{{ device.device_model.part_number }}</td>
+    <td>{{ device.serial_number }}</td>
+    <td>{{ device.client }}</td>
+    <td>{% if device.contract %}{{ device.contract }}{% else %}Sin contrato{% endif %}</td>
+</tr>
+{% endfor %}

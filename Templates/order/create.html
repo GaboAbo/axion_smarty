@@ -1,0 +1,64 @@
+{% load static %}
+
+<form
+    id="create_or_edit_order"
+    class="w-1/2 p-4 flex flex-col gap-2 bg-slate-50/50 rounded-sm justify-center items-center text-sm"
+    hx-post="{% url "createOrder" %}"
+    hx-target="#create_or_edit_order"
+    hx-swap="outerHTML transition:true"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <p class="text-xl">Crear nueva Orden de trabajo</p>
+    <div
+        id="client"
+        class="w-full h-[24px] flex flex-row"
+        hx-get="{% url "contractsByClient" %}"
+        hx-trigger="change delay:250ms"
+        hx-target="#contracts"
+        hx-swap="outerHTML"
+        hx-include="this">
+        <p class="w-1/4">Cliente</p>
+        {{ form.client }}
+    </div>
+    <div
+        id="contract" 
+        class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Contrato</p>
+        <input
+            id="contracts"
+            class="w-full h-full border-2 border-slate-500 rounded-sm text-sm px-2"
+            placeholder="Debe seleccionar un Cliente para poder seleccionar un Contrato"
+            disabled>
+    </div>
+    <div id="devices" class="w-full h-[240px] flex flex-row justify-center items-center"
+        hx-get="{% url "devicesByClient" %}"
+        hx-trigger="change from:#client, change from:#contract delay:250ms"
+        hx-target="#device_list"
+        hx-swap="outerHTML"
+        hx-include="#contract, #client">
+        <p class="w-1/4">Equipos</p>
+        <textarea
+            id="device_list"
+            class="w-full h-full border-2 border-slate-500 rounded-sm text-sm px-2 text-gray-400"
+            >Debe seleccionar un Cliente o Contrato para poder seleccionar Equipos
+        </textarea>
+    </div>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Estado</p>
+        {{ form.status }}
+    </div>
+    <div class="w-full h-[24px] flex flex-row">
+        <p class="w-1/4">Ingeniero</p>
+        {{ form.engineer }}
+    </div>
+    <input
+        class="w-full h-[22px] bg-green-500 hover:bg-green-600 duration-300 text-white text-sm"
+        type="submit"
+        value="Crear Orden">
+    <button
+        class="w-full h-[22px] bg-slate-500 hover:bg-slate-600 duration-300 text-white text-sm"
+        hx-get="{% url "getAllOrders" %}"
+        hx-target="#create_or_edit_order"
+        hx-swap="outerHTML transition:true">
+        Volver a ordenes
+    </button>
+</form>

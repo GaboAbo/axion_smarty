@@ -1,0 +1,28 @@
+<html>
+    <body style="font-color: rgb(30, 41, 59); font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+        <p>Estimad@ {{ order.client_personal_name }}.</p>
+        <p>Junto con saludar y esperando que se encuentre bien, se detallan los trabajos realizados en vuestras dependencias.</p>
+        <p>Mantenimiento preventivo de los siguientes equipos:</p>
+        <table style="width: 1024px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse; table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">Modelo</th>
+                    <th style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">Serie</th>
+                    <th style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for protocol in protocols %}
+                <tr>
+                    <td style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">{{ protocol.device.device_model.part_number }}</td>
+                    <td style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">{{ protocol.device.serial_number }}</td>
+                    <td style="padding: 2px; border-width: 2px; border-style: solid; color: rgb(30, 41, 59); border-collapse: collapse;">{{ protocol.get_status_display }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Encontrará el detalle de los mantenimientos realizados en el archivo adjunto, quedo atento a sus comentarios.</p>
+        <p>Sin más que decir, me despido.</p>
+        <br/>
+    </body>
+</html>
