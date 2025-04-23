@@ -62,7 +62,7 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip release.zip -d /home/site/wwwroot/
 
       
       - name: Login to Azure
