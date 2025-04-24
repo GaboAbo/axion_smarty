@@ -25,13 +25,11 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
 
       - name: Remove venv and unnecessary files
         run: |
-          deactivate || true
           find . -name '__pycache__' -type d -exec rm -rf {} +
 
       - name: Zip artifact
