@@ -78,6 +78,7 @@ jobs:
 
       - name: Unzip release.zip and move to wwwroot
         run: |
+          sudo mkdir -p /home/site/wwwroot
           unzip -o release.zip -d /home/site/wwwroot
           rm -rf /home/site/wwwroot/output.tar.gz
 
