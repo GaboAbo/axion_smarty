@@ -65,6 +65,11 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
+      - name: Clean existing files from wwwroot
+        run: |
+          echo "Cleaning up old files in /home/site/wwwroot"
+          rm -rf /home/site/wwwroot/*
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
