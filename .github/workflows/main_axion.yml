@@ -33,6 +33,8 @@ jobs:
         run: |
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
+          env:
+            DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
