@@ -76,7 +76,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
+      - name: Unzip release.zip and move to wwwroot
+        run: |
+          mkdir -p /home/site/wwwroot
+          unzip -o release.zip -d /home/site/wwwroot
+          rm -rf /home/site/wwwroot/output.tar.gz
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
