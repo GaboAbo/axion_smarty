@@ -35,14 +35,14 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Clean up previous artifacts
-        run: rm -f release.zip
+        run: rm -rf release.zip
 
       - name: Zip artifact for deployment
         run: |
-          mkdir release
+          mkdir deploy
           shopt -s extglob
-          cp -r !(venv|release|.git|*.zip) release/
-          cd release
+          cp -r !(venv|.git|*.zip|output.tar.gz|deploy) deploy/
+          cd deploy
           zip -r ../release.zip .
 
 
