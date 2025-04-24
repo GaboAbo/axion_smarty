@@ -35,15 +35,18 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Clean up previous artifacts
-        run: rm -rf release.zip
+        run: |
+          rm -rf release.zip
+          rm -rf /home/site/wwwroot/*
 
       - name: Zip artifact for deployment
         run: |
           mkdir deploy
-          shopt -s extglob
-          cp -r !(venv|.git|*.zip|output.tar.gz|deploy) deploy/
+          rsync -av --exclude='venv' --exclude='__pycache__' --exclude='.git' \
+            --exclude='*.zip' --exclude='*.tar.gz' --exclude='output.tar.gz' \
+            ./ ./deploy/
           cd deploy
-          zip -r ../release.zip .
+          zip -r ../release.zip ./*
 
 
       - name: Upload artifact for deployment jobs
@@ -65,11 +68,6 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
-      - name: Clean existing files from wwwroot
-        run: |
-          echo "Cleaning up old files in /home/site/wwwroot"
-          rm -rf /home/site/wwwroot/*
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
@@ -85,6 +83,12 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9FE7CCAE5FC74ED6A3D5E12E98E50EA5 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7ABE3A92B32143BDBC2671BB92D46C16 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7F5C0EFB5132462F9CA5D89C0E0661F3 }}
+
+      
+      - name: Clean existing files from wwwroot
+        run: |
+          echo "Cleaning up old files in /home/site/wwwroot"
+          rm -rf /home/site/wwwroot/*
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
