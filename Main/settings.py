@@ -15,8 +15,7 @@ if not SECRET_KEY:
 DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = [".azurewebsites.net"]
-ALLOWED_HOSTS = ["*"]  # TEMP for debugging; restrict in prod!
-#ALLOWED_HOSTS = [".azurewebsites.net", "localhost", "axion"]
+ALLOWED_HOSTS = [".azurewebsites.net", "localhost", "axion"]
 ALLOWED_REDIRECT_HOSTS = ["axion"]
 
 LOGIN_URL = '/auth/login/'
