@@ -74,10 +74,6 @@ jobs:
           name: python-app
           path: ./unzipped
   
-      - name: Unzip release.zip
-        run: |
-          unzip ./unzipped/release.zip -d ./unzipped/deploy_dir
-  
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -91,4 +87,4 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: ./unzipped/deploy_dir
+          package: ./unzipped/release.zip
