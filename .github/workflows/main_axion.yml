@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
+    env:
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +33,6 @@ jobs:
       
       - name: Install dependencies
         run: |
-          export DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
         
