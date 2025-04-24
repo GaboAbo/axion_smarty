@@ -1,4 +1,8 @@
-name: Build and deploy Django app to Azure Web App - axion
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+
+name: Build and deploy Python app to Azure Web App - axion
 
 on:
   push:
@@ -10,32 +14,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read #This is required for actions/checkout
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python version
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Set up virtual environment
+      - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
+      
+      - name: Install dependencies
+        run: |
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
+        
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Remove venv and unnecessary files
-        run: |
-          find . -name '__pycache__' -type d -exec rm -rf {} +
-
-      - name: Zip artifact
+      - name: Zip artifact for deployment
         run: zip -r release.zip . -x '*.git*'
 
-      - name: Upload artifact
+      - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
@@ -48,18 +52,19 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
-      contents: read
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
-      - name: Download artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: python-app
 
-      - name: Unzip artifact
+      - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -67,10 +72,11 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7ABE3A92B32143BDBC2671BB92D46C16 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7F5C0EFB5132462F9CA5D89C0E0661F3 }}
 
-      - name: Deploy to Azure Web App
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'axion'
           slot-name: 'Production'
           package: release.zip
+          
