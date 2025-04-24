@@ -34,20 +34,8 @@ jobs:
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
-      - name: Clean up previous artifacts
-        run: |
-          rm -rf release.zip
-          rm -rf /home/site/wwwroot/*
-
       - name: Zip artifact for deployment
-        run: |
-          mkdir deploy
-          rsync -av --exclude='venv' --exclude='__pycache__' --exclude='.git' \
-            --exclude='*.zip' --exclude='*.tar.gz' --exclude='output.tar.gz' \
-            ./ ./deploy/
-          cd deploy
-          zip -r ../release.zip ./*
-
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -64,27 +52,30 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
-      contents: read
-  
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: python-app
-          path: ./unzipped
-  
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9FE7CCAE5FC74ED6A3D5E12E98E50EA5 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7ABE3A92B32143BDBC2671BB92D46C16 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7F5C0EFB5132462F9CA5D89C0E0661F3 }}
-  
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: ./unzipped/release.zip
+          
