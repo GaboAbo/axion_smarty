@@ -78,8 +78,7 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: release.zip
-          type: zip
+          package: .
           startup-command: 'gunicorn Main.wsgi --bind=0.0.0.0'
 
       - name: Show file types before deployment
