@@ -63,9 +63,8 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: |
-          pwd
           unzip release.zip
-          ls -la
+          rm -rf release.zip
 
       
       - name: Login to Azure
@@ -81,4 +80,8 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
+
+      - name: Show file types before deployment
+        run: file *
+
           
