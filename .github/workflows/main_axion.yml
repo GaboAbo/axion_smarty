@@ -82,6 +82,7 @@ jobs:
           app-name: 'axion'
           slot-name: 'Production'
           package: .
+          enable-oryx-build: false
 
       - name: Show file types before deployment
         run: file *
