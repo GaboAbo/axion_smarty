@@ -64,8 +64,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: |
           unzip release.zip
-          rm -f release.zip
-          rm -f *.tar.gz *.zip
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -80,7 +78,8 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: .
+          package: release.zip
+          type: zip
           startup-command: 'gunicorn Main.wsgi --bind=0.0.0.0'
 
       - name: Show file types before deployment
