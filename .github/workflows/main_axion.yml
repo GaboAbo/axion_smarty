@@ -78,7 +78,7 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: .
+          package: release.zip
 
       - name: Show file types before deployment
         run: file *
