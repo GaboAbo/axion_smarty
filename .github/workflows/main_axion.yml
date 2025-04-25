@@ -64,8 +64,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: |
           unzip release.zip
-          rm -f release.zip
-          rm -f *.tar.gz *.zip
 
       
       - name: Login to Azure
@@ -81,8 +79,7 @@ jobs:
         with:
           app-name: 'axion'
           slot-name: 'Production'
-          package: .
-          enable-oryx-build: false
+          package: release.zip
 
       - name: Show file types before deployment
         run: file *
