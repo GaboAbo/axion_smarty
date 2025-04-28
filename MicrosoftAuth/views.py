@@ -81,7 +81,7 @@ def microsoft_callback(request):
 
     result = _confidential_client.acquire_token_by_auth_code_flow(
         auth_flow, auth_response,
-        scopes=["api://c9831a03-a488-4a76-b2b9-bc4d49322ebd/User.Read"]
+        scopes=[f"api://{CLIENT_ID}/User.Read"]
     )
     
     if not result or "id_token_claims" not in result:
@@ -119,14 +119,6 @@ def microsoft_logout(request: HttpRequest, app_type: str = "server"):
         return redirect("index")
     elif app_type == "mobile":
         return JsonResponse({"status": 200})
-
-
-def BackendAuth(request):
-    login("robert.mendoza@olympus.com", request)
-    redirect_uri = f"myapp://"
-    
-    return render(request, "redirect.html", {"redirect_uri": redirect_uri})
-
 
 
 def error(request):

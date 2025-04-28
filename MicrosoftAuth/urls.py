@@ -5,7 +5,6 @@ from .views import (
     microsoft_callback,
     microsoft_logout,
     error,
-    BackendAuth,
 )
 
 from .Client.public import (
@@ -20,8 +19,6 @@ urlpatterns = [
     path("callback/", microsoft_callback, name="callback"),
     path("logout/", microsoft_logout, name="logout"),
     path("error/", error, name="error"),
-
-    path("backendAuth", BackendAuth),
 
     path("set_public_client/", set_public_client),
     path("get_flow/", get_flow),
