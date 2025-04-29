@@ -30,6 +30,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy app source
 COPY . .
 
+RUN python manage.py test AuthUser
+
 # Expose port 80
 EXPOSE 80
 

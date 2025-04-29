@@ -1,0 +1,5 @@
+# .dockerignore
+
+# Ignore environment files and secrets
+.env
+

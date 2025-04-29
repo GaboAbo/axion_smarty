@@ -5,10 +5,10 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
 class EnterpriseUser(models.Model):
-    #Child model for Enterprise users(Company that provide/receive services)
-    #entity: User entity
-    #role: User role
-    #sign: Signature for report purposes (not mandatory for clients, unless direct contact)
+    # Child model for Enterprise users(Company that provide/receive services)
+    # entity: User entity
+    # role: User role
+    # sign: Signature for report purposes
     ROLE_CHOICES = [
         ("MAN", "Gerente"),
         ("ENG", "Ingeniero/a"),
@@ -36,7 +36,7 @@ class Engineer(EnterpriseUser, AbstractUser):
 
     groups = models.ManyToManyField(
         Group,
-        related_name='engineer_set',  # renamed from 'user_set'
+        related_name='engineer_set',
         blank=True,
         help_text='The groups this engineer belongs to.',
         verbose_name='groups',
@@ -44,7 +44,7 @@ class Engineer(EnterpriseUser, AbstractUser):
 
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name='engineer_set',  # renamed from 'user_set'
+        related_name='engineer_set',
         blank=True,
         help_text='Specific permissions for this engineer.',
         verbose_name='user permissions',

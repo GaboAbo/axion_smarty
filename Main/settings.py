@@ -2,22 +2,33 @@ import os, environ
 
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
+
 
 env = environ.Env()
 
-if env.str('ENV', default='development') != 'production':
-    environ.Env.read_env()
+environ.Env().read_env()
+
+ENV = env('ENV', default='development')
+
+if ENV == 'production':
+    SECRET_KEY = env('DJANGO_SECRET_KEY')
+    if not SECRET_KEY:
+        raise ValueError("Production requires DJANGO_SECRET_KEY to be set!")
+else:
+    SECRET_KEY = env('DJANGO_SECRET_KEY', default=get_random_secret_key())
+    print("⚠️ Using a default development SECRET_KEY. Do not use this in production!")
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("DJANGO_SECRET_KEY is not set! Check your environment variables.")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = [".azurewebsites.net/"]
+CSRF_TRUSTED_ORIGINS = ["https://axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net/"]
 ALLOWED_HOSTS = ["axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net", "localhost", "axion"]
 ALLOWED_REDIRECT_HOSTS = ["axion"]
 
@@ -90,16 +101,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Main.wsgi.application'
 
-DATABASES = {
+if ENV == 'production':
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'NAME': env('DB_NAME', default=""),
+        'USER': env('DB_USER', default=""),
+        'PASSWORD': env('DB_PASSWORD', default=""),
+        'HOST': env('DB_HOST', default=""),
+        'PORT': env('DB_PORT', default=""),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': env.db(default='sqlite:///db.sqlite3')
+    }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -158,7 +175,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rmendoza.abd@gmail.com'
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default="")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGGING = {
