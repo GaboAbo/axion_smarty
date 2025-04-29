@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href={% static "output.css" %} rel="stylesheet">
-        <link rel="icon" href="{% static 'icons/logo.svg' %}" type="image/svg+xml">
+        <link rel="icon" href="{% static 'icons/axion_logo.svg' %}" type="image/svg+xml">
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     </head>
     <body class="w-full h-screen flex justify-center items-center font-roboto text-slate-700 relative overflow-hidden">
@@ -19,7 +19,14 @@
 
         <div class="z-10 flex flex-col justify-center items-center space-y-20 h-1/2 w-1/3">
             <p class="basic-title text-slate-700">Bienvenido a Axion</p>
-            <div class="space-y-2">
+            <div class="space-y-2 flex flex-col justify-center items-center w-[300px]">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <a href="{% url 'login' %}" class="w-[200px] h-[44px] text-white bg-blue-500 hover:bg-blue-600 duration-300 flex justify-center items-center font-semibold">
                     Iniciar Sesión
                 </a>

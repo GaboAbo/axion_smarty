@@ -1,73 +1,23 @@
-import jwt, requests, os, base64
+import jwt, requests, base64, environ, logging
 from dotenv import load_dotenv
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 from rest_framework.exceptions import AuthenticationFailed
-from msal import ConfidentialClientApplication, PublicClientApplication
 
-load_dotenv()
+logger = logging.getLogger(__name__)
+
+env = environ.Env()
+
+if env.str('ENV', default='development') != 'production':
+    environ.Env.read_env()
 
 # Environment Variables
-TENANT = os.getenv("MICROSOFT_TENANT", "")
-CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID", "")
-CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET", "")
-REDIRECT_URI = os.getenv("MICROSOFT_REDIRECT_URI", "")
-REDIRECT_URI_MOBILE = os.getenv("MICROSOFT_REDIRECT_URI_MOBILE", "")
-
-# Singleton Instances (Created Once and Reused)
-_confidential_client = None
-_public_client = None
-
-
-def get_microsoft_client(app_type: str):
-    """
-    Returns a singleton instance of the Microsoft authentication client.
-    
-    Args:
-        app_type (str): The type of the application ("server" for ConfidentialClientApplication,
-                        "mobile" for PublicClientApplication).
-
-    Returns:
-        ConfidentialClientApplication or PublicClientApplication instance.
-    
-    Raises:
-        ValueError: If an invalid app_type is provided.
-    """
-
-    global _confidential_client, _public_client, auth_flow
-
-    if app_type == "server":
-        if _confidential_client is None:
-            _confidential_client = ConfidentialClientApplication(
-                CLIENT_ID,
-                client_secret=CLIENT_SECRET,
-                authority=TENANT,
-            )
-            auth_flow = _confidential_client.initiate_auth_code_flow(
-                scopes=[f"api://{CLIENT_ID}/User.Read"],
-                redirect_uri=REDIRECT_URI,
-            )
-        return _confidential_client, auth_flow
-
-    elif app_type == "mobile":
-        if _public_client is None:
-            _public_client = PublicClientApplication(
-                CLIENT_ID,
-                authority=TENANT,
-            )
-            auth_flow = _public_client.initiate_auth_code_flow(
-                scopes=[f"api://{CLIENT_ID}/User.Read"],
-                redirect_uri=REDIRECT_URI_MOBILE,
-            )
-        return _public_client, auth_flow
-
-    else:
-        raise ValueError("Invalid app_type. Use 'server' or 'mobile'.")
+TENANT = env("MICROSOFT_TENANT", default="")
 
 
 def get_microsoft_public_keys():
-    url = f"{os.getenv('MICROSOFT_TENANT')}/discovery/v2.0/keys"
+    url = f"https://login.microsoftonline.com/{TENANT}/discovery/v2.0/keys"
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raises an error for bad status codes
@@ -98,10 +48,6 @@ def jwk_to_pem(jwk):
     return pem
 
 
-def get_token(request):
-    pass
-
-
 def validate_microsoft_token(token):
     try:
         header = jwt.get_unverified_header(token)
@@ -128,8 +74,6 @@ def validate_microsoft_token(token):
         return "success"
 
     except jwt.ExpiredSignatureError:
-        print("Token has expired.")
         raise AuthenticationFailed("Token has expired.")
     except jwt.InvalidTokenError:
-        print("Invalid token.")
         raise AuthenticationFailed("Invalid token.")

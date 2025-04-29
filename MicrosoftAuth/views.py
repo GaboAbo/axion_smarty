@@ -1,5 +1,4 @@
-import os
-from dotenv import load_dotenv
+import environ, logging
 
 from msal import ConfidentialClientApplication
 
@@ -14,13 +13,18 @@ from AuthUser.models import Engineer
 
 from rest_framework.exceptions import AuthenticationFailed
 
-load_dotenv()
+logger = logging.getLogger(__name__)
+
+env = environ.Env()
+
+if env.str('ENV', default='development') != 'production':
+    environ.Env.read_env()
 
 # Environment Variables
-TENANT = os.getenv("MICROSOFT_TENANT", "")
-CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID", "")
-CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET", "")
-REDIRECT_URI = os.getenv("MICROSOFT_REDIRECT_URI", "")
+TENANT = env("MICROSOFT_TENANT", default="")
+CLIENT_ID = env("MICROSOFT_CLIENT_ID", default="")
+CLIENT_SECRET = env("MICROSOFT_CLIENT_SECRET", default="")
+REDIRECT_URI = env("MICROSOFT_REDIRECT_URI", default="")
 
 _confidential_client = None
 
@@ -31,7 +35,7 @@ def set_client():
         _confidential_client = ConfidentialClientApplication(
             CLIENT_ID,
             CLIENT_SECRET,
-            authority=TENANT,
+            authority=f"https://login.microsoftonline.com/{TENANT}",
         )
     return _confidential_client
 
@@ -85,19 +89,22 @@ def microsoft_callback(request):
     )
     
     if not result or "id_token_claims" not in result:
+        logger.warning("Microsoft callback failed: Missing id_token_claims or result is empty. Result: %s", result)
         messages.error(request, "Error al autenticar con Microsoft")
-        return redirect("error")
+        return redirect("/")
     
     access_token = result.get("access_token")
     claims = result.get("id_token_claims")
     
     try:
-        decoded_token = validate_microsoft_token(access_token)
-        user_email = claims.get("preferred_username")
-        full_name = claims.get("name")
+        validation_result = validate_microsoft_token(access_token)
+        if validation_result == "success":
+            user_email = claims.get("preferred_username")
+            full_name = claims.get("name")
     except AuthenticationFailed as e:
+        logger.warning("Microsoft callback failed: Token not valid. Result: %s", result)
         messages.error(request, f"Error al validar el token: {str(e)}")
-        return redirect("error")
+        return redirect("/")
 
     user = Engineer.objects.filter(email=user_email).first()
     if user:

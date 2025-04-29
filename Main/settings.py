@@ -1,23 +1,24 @@
-import os
+import os, environ
 
 from pathlib import Path
 
-from dotenv import load_dotenv
 
+env = environ.Env()
 
-load_dotenv()
+if env.str('ENV', default='development') != 'production':
+    environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY is not set! Check your environment variables.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ["https://axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net/"]
-ALLOWED_HOSTS = ["https://axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net/", "localhost", "axion"]
+CSRF_TRUSTED_ORIGINS = [".azurewebsites.net/"]
+ALLOWED_HOSTS = ["axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net", "localhost", "axion"]
 ALLOWED_REDIRECT_HOSTS = ["axion"]
 
 LOGIN_URL = '/auth/login/'
@@ -92,11 +93,11 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -157,5 +158,31 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rmendoza.abd@gmail.com'
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "Axion": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
