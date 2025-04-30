@@ -13,7 +13,7 @@
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     </head>
     <body class="basic-container w-full h-screen font-roboto text-slate-700">
-        <div class="absolute top-0 r-1/2 w-[1200px] h-[44px] bg-white/80 flex justify-around font-semibold">
+        <div class="absolute top-0 r-1/2 w-full h-[44px] bg-white/80 flex justify-around font-semibold">
             <div class="w-5/6 h-full flex items-center">
                 <p class="px-2 basic-text">Bienvenid@, {{ full_name }}</p>
             </div>
@@ -28,7 +28,7 @@
         
         <div
             id="sidebar"
-            class="absolute bottom-0 r-1/2 w-[1200px] h-[44px] bg-white/50 flex justify-around font-semibold">
+            class="absolute bottom-0 r-1/2 w-full h-[44px] bg-white/50 flex justify-around font-semibold">
         
             <button
                 class="w-1/2 h-[44px] {% if active_tab == 'order' %}bg-blue-500 text-white{% else %}bg-transparent hover:bg-slate-600/20 duration-300{% endif %}"
