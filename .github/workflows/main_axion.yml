@@ -39,6 +39,9 @@ jobs:
       - name: Run Django tests
         run: |
           docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py test
+        env:
+          ENV: production
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
       - name: Push image to ACR
         run: |
