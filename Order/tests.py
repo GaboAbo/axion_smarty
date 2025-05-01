@@ -27,7 +27,7 @@ class OrderModelTest(TestCase):
         )
 
         # Create Client
-        self.client = Client.objects.create(
+        self.client = Entity.objects.create(
             first_name="Client",
             last_name="User",
             entity=self.entity,
