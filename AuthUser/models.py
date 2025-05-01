@@ -55,7 +55,9 @@ class Engineer(EnterpriseUser, AbstractUser):
         verbose_name_plural = "Ingenieros"
 
 
-class Client(EnterpriseUser, AbstractUser):
+class Client(EnterpriseUser):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = "Cliente"
