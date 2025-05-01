@@ -19,7 +19,7 @@ if ENV == 'production':
     print("Using production SECRET_KEY. DEBUG set to False")
 else:
     SECRET_KEY = env('DJANGO_SECRET_KEY', default=get_random_secret_key())
-    DEBUG = False
+    DEBUG = True
     print("⚠️ Using a default development SECRET_KEY. DEBUG set to True. Do not use this in production!")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
