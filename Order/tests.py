@@ -13,7 +13,6 @@ class OrderModelTest(TestCase):
         # Create Entity
         self.entity = Entity.objects.create(
             name="Test Clinic",
-            city="Santiago",
             address="123 Main Street"
         )
 
