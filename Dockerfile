@@ -25,20 +25,16 @@ WORKDIR /app
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
-RUN mkdir -p /app && chmod -R 755 /app
 
 # Copy app source code
 COPY . .
-
-COPY migrate.sh /app/migrate.sh
-RUN chmod +x /app/migrate.sh
 
 # Create non-root user and switch to it
 RUN adduser --disabled-password appuser
 USER appuser
 
-WORKDIR /app
-COPY --chown=appuser:appuser . .
+# Expose port
+EXPOSE 80
 
-# Run entrypoint
-ENTRYPOINT ["/app/migrate.sh"]
+# Start Gunicorn
+CMD ["sh", "-c", "gunicorn Main.wsgi:application --bind 0.0.0.0:${PORT}"]
