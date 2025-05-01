@@ -38,7 +38,7 @@ jobs:
 
       - name: Collect static files
         run: |
-          docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py collectstatic --noinput
+          docker run --rm -e STATIC_ROOT=/staticfiles ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py collectstatic --noinput
 
       - name: Run Django tests
         run: |
