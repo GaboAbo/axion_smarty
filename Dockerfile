@@ -39,7 +39,6 @@ EXPOSE 80
 
 # Start Gunicorn
 COPY migrate.sh /app/migrate.sh
-RUN chmod +x /app/migrate.sh
 
 ENTRYPOINT ["/app/migrate.sh"]
 
