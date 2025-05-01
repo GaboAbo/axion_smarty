@@ -25,6 +25,7 @@ WORKDIR /app
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN mkdir -p /app/staticfiles && chmod -R 777 /app/staticfiles
 
 # Copy app source code
 COPY . .
