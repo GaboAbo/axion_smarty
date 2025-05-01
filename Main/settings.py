@@ -110,7 +110,8 @@ if ENV == 'production':
     }
 else:
     DATABASES = {
-        'default': env.db(default='sqlite:///db.sqlite3')
+        'default': env.db(default='sqlite:///db.sqlite3'),
+        'NAME': BASE_DIR / "db.sqlite3", 
     }
 
 
