@@ -30,15 +30,15 @@ RUN mkdir -p /app && chmod -R 755 /app
 # Copy app source code
 COPY . .
 
+COPY migrate.sh /app/migrate.sh
+RUN chmod +x /app/migrate.sh
+
 # Create non-root user and switch to it
 RUN adduser --disabled-password appuser
 USER appuser
 
-# Expose port
-EXPOSE 80
+WORKDIR /app
+COPY --chown=appuser:appuser . .
 
-# Start Gunicorn
-COPY migrate.sh /app/migrate.sh
-
+# Run entrypoint
 ENTRYPOINT ["/app/migrate.sh"]
-
