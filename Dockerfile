@@ -38,4 +38,8 @@ USER appuser
 EXPOSE 80
 
 # Start Gunicorn
-CMD ["sh", "-c", "gunicorn Main.wsgi:application --bind 0.0.0.0:${PORT}"]
+COPY migrate.sh /app/migrate.sh
+RUN chmod +x /app/migrate.sh
+
+ENTRYPOINT ["/app/migrate.sh"]
+
