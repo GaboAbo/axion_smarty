@@ -15,18 +15,14 @@ if ENV == 'production':
     SECRET_KEY = env('DJANGO_SECRET_KEY')
     if not SECRET_KEY:
         raise ValueError("Production requires DJANGO_SECRET_KEY to be set!")
+    DEBUG = False
+    print("Using production SECRET_KEY. DEBUG set to False")
 else:
     SECRET_KEY = env('DJANGO_SECRET_KEY', default=get_random_secret_key())
-    print("⚠️ Using a default development SECRET_KEY. Do not use this in production!")
-
-
+    DEBUG = True
+    print("⚠️ Using a default development SECRET_KEY. DEBUG set to True. Do not use this in production!")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["https://axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net/"]
 ALLOWED_HOSTS = ["axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net"]
