@@ -56,8 +56,8 @@ class Engineer(EnterpriseUser, AbstractUser):
 
 
 class Client(EnterpriseUser):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name = "Cliente"
