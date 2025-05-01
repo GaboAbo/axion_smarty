@@ -1,35 +1,41 @@
 from django.test import TestCase
 from django.utils import timezone
-
-from Entity.models import Entity, Contract
-from Order.models import Order, MaintenanceProtocol
 from datetime import timedelta
 
-from django.db import models
-
+from AuthUser.models import Engineer, Client
+from Entity.models import Entity, Contract
+from Device.models import Device, DeviceModel
+from Order.models import Order, MaintenanceProtocol
 
 # Create your tests here.
-class FakeEngineer(models.Model):
-    name = models.CharField(max_length=50)
-
-
-class FakeClient(models.Model):
-    name = models.CharField(max_length=50)
-
-
-class FakeDeviceModel(models.Model):
-    part_number = models.CharField(max_length=50)
-
-
-class FakeDevice(models.Model):
-    device_model = models.ForeignKey(FakeDeviceModel, on_delete=models.CASCADE)
-    serial_number = models.CharField(max_length=50)
-
-
-# === ACTUAL TEST CASES ===
 class OrderModelTest(TestCase):
     def setUp(self):
-        self.entity = Entity.objects.create(name="Hospital A", address="Main Street 1")
+        # Create Entity
+        self.entity = Entity.objects.create(
+            name="Test Clinic",
+            city="Santiago",
+            address="123 Main Street"
+        )
+
+        # Create Engineer
+        self.engineer = Engineer.objects.create_user(
+            username="testengineer",
+            password="securepass123",
+            first_name="John",
+            last_name="Doe",
+            entity=self.entity,
+            role="ENG"
+        )
+
+        # Create Client
+        self.client = Client.objects.create(
+            first_name="Client",
+            last_name="User",
+            entity=self.entity,
+            role="DOC"
+        )
+
+        # Create Contract
         self.contract = Contract.objects.create(
             entity=self.entity,
             number=1001,
@@ -37,69 +43,48 @@ class OrderModelTest(TestCase):
             start_date=timezone.now().date(),
             end_date=timezone.now().date() + timedelta(days=365)
         )
-        self.engineer = FakeEngineer.objects.create(name="Ing. Mario")
-        self.client_user = FakeClient.objects.create(name="Client Org")
-        self.device_model = FakeDeviceModel.objects.create(part_number="ABC123")
-        self.device = FakeDevice.objects.create(
-            device_model=self.device_model,
-            serial_number="SN001"
+
+        # Create DeviceModel
+        self.device_model = DeviceModel.objects.create(
+            device_type="END",
+            device_gen="EX3",
+            part_number="GIF-H190"
         )
 
-    def test_order_creation(self):
-        order = Order.objects.create(
-            engineer=self.engineer,
+        # Create Device
+        self.device = Device.objects.create(
             client=self.entity,
             contract=self.contract,
-            client_AuthUser=self.client_user,
-            client_personal_name="Carlos Ruiz",
-            client_sign="(signed)",
-            status="PR"
-        )
-        order.device.add(self.device)
-
-        self.assertIsNotNone(order.pk)
-        self.assertEqual(order.status, "PR")
-        self.assertEqual(order.client.name, "Hospital A")
-        self.assertEqual(str(order), f"Order {order.id} - Estado: {order.status}")
-
-
-class MaintenanceProtocolModelTest(TestCase):
-    def setUp(self):
-        self.entity = Entity.objects.create(name="Clinic B", address="Avenida Norte")
-        self.contract = Contract.objects.create(
-            entity=self.entity,
-            number=2002,
-            contract_type="GT",
-            start_date=timezone.now().date(),
-            end_date=timezone.now().date() + timedelta(days=180)
-        )
-        self.engineer = FakeEngineer.objects.create(name="Ing. Sofia")
-        self.client_user = FakeClient.objects.create(name="Client Health Co")
-        self.device_model = FakeDeviceModel.objects.create(part_number="XYZ789")
-        self.device = FakeDevice.objects.create(
             device_model=self.device_model,
-            serial_number="SN999"
+            serial_number="SN123456"
         )
+
+        # Create Order
         self.order = Order.objects.create(
             engineer=self.engineer,
-            client=self.entity,
+            entity=self.entity,
             contract=self.contract,
-            client_AuthUser=self.client_user,
-            status="CT"
+            client=self.client,
+            maintenance_type="COR",
+            failure_type="ELC",
+            entry_date=timezone.now(),
+            state="NEW"
         )
-        self.order.device.add(self.device)
 
-    def test_protocol_creation(self):
-        protocol = MaintenanceProtocol.objects.create(
-            device=self.device,
+        # Associate Device with Order (M2M)
+        self.order.device.set([self.device])
+
+        # Create MaintenanceProtocol
+        self.protocol = MaintenanceProtocol.objects.create(
             order=self.order,
-            status="OPSO",
-            location="2nd Floor",
-            fields={"pressure": "OK", "voltage": "Stable"}
+            device=self.device,
+            service_type="COR",
+            observations="Replaced power board"
         )
 
-        self.assertIsNotNone(protocol.pk)
-        self.assertEqual(protocol.status, "OPSO")
-        self.assertEqual(protocol.location, "2nd Floor")
-        self.assertIn("pressure", protocol.fields)
-        self.assertEqual(str(protocol), f"{self.device.device_model.part_number} - {self.device.serial_number}: {protocol.status}")
+    def test_order_str_representation(self):
+        self.assertEqual(str(self.order), f"OT-{self.order.pk}")
+
+    def test_protocol_str_representation(self):
+        expected_str = f"{self.device.device_model.part_number} - {self.device.serial_number}"
+        self.assertEqual(str(self.protocol), expected_str)
