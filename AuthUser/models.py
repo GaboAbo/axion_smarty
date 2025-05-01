@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 
 
 # Create your models here.
-class EnterpriseUser(models.Model, AbstractUser):
+class EnterpriseUser(models.Model):
     # Child model for Enterprise users(Company that provide/receive services)
     # entity: User entity
     # role: User role
@@ -31,7 +31,7 @@ class EnterpriseUser(models.Model, AbstractUser):
         return f"{self.last_name} {self.first_name}"
 
 
-class Engineer(EnterpriseUser):
+class Engineer(EnterpriseUser, AbstractUser):
     signature = models.TextField("Firma", null=True, blank=True)
 
     groups = models.ManyToManyField(
@@ -55,7 +55,7 @@ class Engineer(EnterpriseUser):
         verbose_name_plural = "Ingenieros"
 
 
-class Client(EnterpriseUser):
+class Client(EnterpriseUser, AbstractUser):
 
     class Meta:
         verbose_name = "Cliente"
