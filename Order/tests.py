@@ -22,7 +22,11 @@ class OrderModelTest(TestCase):
             password="securepass123",
             first_name="John",
             last_name="Doe",
-            role="ENG"
+            email="john.doe@example.com",
+            entity=self.client
+            role="ENG",
+            is_active=True,
+            is_staff=False
         )
 
         # Create Client
