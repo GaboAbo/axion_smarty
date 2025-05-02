@@ -29,13 +29,13 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy app source code
 COPY . .
 
-# Create non-root user and switch to it
-RUN adduser --disabled-password appuser
-USER appuser
-
 # Collect static files
 RUN mkdir -p /app/staticfiles && chmod 777 /app/staticfiles
 RUN python manage.py collectstatic --noinput
+
+# Create non-root user and switch to it
+RUN adduser --disabled-password appuser
+USER appuser
 
 # Expose port
 EXPOSE 80
