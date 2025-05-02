@@ -31,8 +31,8 @@ class OrderModelTest(TestCase):
 
         # Create Client
         self.client_AuthUser = Client.objects.create(
-            client_AuthUser=self.client_AuthUser,
-            role="DOC"
+            first_name="Foo",
+            last_name="Fighter",
         )
 
         # Create Contract
