@@ -34,6 +34,7 @@ RUN adduser --disabled-password appuser
 USER appuser
 
 # Collect static files
+RUN mkdir staticfiles/ && chmod 777 staticfiles/
 RUN python manage.py collectstatic --noinput
 
 # Expose port
