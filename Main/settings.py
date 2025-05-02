@@ -112,7 +112,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': env.db(default='sqlite:///db.sqlite3'),
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': str(BASE_DIR / 'db.sqlite3'),
         },
     }
 
