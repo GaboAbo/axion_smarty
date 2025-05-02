@@ -39,7 +39,7 @@ class OrderModelTest(TestCase):
 
         # Create Contract
         self.contract = Contract.objects.create(
-            entity=self.entity,
+            entity=self.client,
             number=1001,
             contract_type="PV",
             start_date=timezone.now().date(),
@@ -55,7 +55,7 @@ class OrderModelTest(TestCase):
 
         # Create Device
         self.device = Device.objects.create(
-            client=self.entity,
+            client=self.client,
             contract=self.contract,
             device_model=self.device_model,
             serial_number="SN123456"
@@ -64,13 +64,10 @@ class OrderModelTest(TestCase):
         # Create Order
         self.order = Order.objects.create(
             engineer=self.engineer,
-            entity=self.entity,
-            contract=self.contract,
             client=self.client,
-            maintenance_type="COR",
-            failure_type="ELC",
-            entry_date=timezone.now(),
-            state="NEW"
+            contract=self.contract,
+            client_AuthUser=self.client_AuthUser,
+            status="PR"
         )
 
         # Associate Device with Order (M2M)
@@ -80,13 +77,13 @@ class OrderModelTest(TestCase):
         self.protocol = MaintenanceProtocol.objects.create(
             order=self.order,
             device=self.device,
-            service_type="COR",
-            observations="Replaced power board"
+            status="SR",
+            fields={"Electronics": "Replaced power board"}
         )
 
     def test_order_str_representation(self):
-        self.assertEqual(str(self.order), f"OT-{self.order.pk}")
+        self.assertEqual(str(self.order), f"Order {self.order.pk} - Estado: PR")
 
     def test_protocol_str_representation(self):
-        expected_str = f"{self.device.device_model.part_number} - {self.device.serial_number}"
+        expected_str = f"{self.device.device_model.part_number} - {self.device.serial_number}: SR"
         self.assertEqual(str(self.protocol), expected_str)
