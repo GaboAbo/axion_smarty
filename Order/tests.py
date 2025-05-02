@@ -23,7 +23,7 @@ class OrderModelTest(TestCase):
             first_name="John",
             last_name="Doe",
             email="john.doe@example.com",
-            entity=self.client
+            entity=self.client,
             role="ENG",
             is_active=True,
             is_staff=False
