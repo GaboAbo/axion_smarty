@@ -22,13 +22,12 @@ class OrderModelTest(TestCase):
             password="securepass123",
             first_name="John",
             last_name="Doe",
-            entity=self.entity,
             role="ENG"
         )
 
         # Create Client
         self.client_AuthUser = Client.objects.create(
-            entity=self.entity,
+            client_AuthUser=self.client_AuthUser,
             role="DOC"
         )
 
