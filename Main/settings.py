@@ -99,21 +99,21 @@ WSGI_APPLICATION = 'Main.wsgi.application'
 
 if ENV == 'production':
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME', default=""),
-        'USER': env('DB_USER', default=""),
-        'PASSWORD': env('DB_PASSWORD', default=""),
-        'HOST': env('DB_HOST', default=""),
-        'PORT': env('DB_PORT', default=""),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME', default=""),
+            'USER': env('DB_USER', default=""),
+            'PASSWORD': env('DB_PASSWORD', default=""),
+            'HOST': env('DB_HOST', default=""),
+            'PORT': env('DB_PORT', default=""),
         }
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': env.db(default='sqlite:///db.sqlite3'),
-            'NAME': str(BASE_DIR / 'db.sqlite3'),
-        },
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 
 
