@@ -11,7 +11,7 @@ from Order.models import Order, MaintenanceProtocol
 class OrderModelTest(TestCase):
     def setUp(self):
         # Create Entity
-        self.entity = Entity.objects.create(
+        self.client = Entity.objects.create(
             name="Test Clinic",
             address="123 Main Street"
         )
@@ -27,7 +27,7 @@ class OrderModelTest(TestCase):
         )
 
         # Create Client
-        self.client = Client.objects.create(
+        self.client_AuthUser = Client.objects.create(
             entity=self.entity,
             role="DOC"
         )
