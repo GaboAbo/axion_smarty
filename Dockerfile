@@ -33,6 +33,9 @@ COPY . .
 RUN adduser --disabled-password appuser
 USER appuser
 
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
 # Expose port
 EXPOSE 80
 

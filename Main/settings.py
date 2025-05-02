@@ -25,7 +25,13 @@ else:
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CSRF_TRUSTED_ORIGINS = ["https://axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net/"]
-ALLOWED_HOSTS = ["axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net", "169.254.129.2", "169.254.129.3", "169.254.129.4"]
+ALLOWED_HOSTS = [
+    "axion-b6fke8edgahaecgq.eastus2-01.azurewebsites.net",
+    "169.254.129.2",
+    "169.254.129.3",
+    "169.254.129.4",
+    "169.254.129.5"
+]
 ALLOWED_REDIRECT_HOSTS = ["axion"]
 
 LOGIN_URL = '/auth/login/'
