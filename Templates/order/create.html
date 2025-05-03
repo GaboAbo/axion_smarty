@@ -51,11 +51,11 @@
         {{ form.engineer }}
     </div>
     <input
-        class="w-full h-[22px] bg-green-500 hover:bg-green-600 duration-300 text-white text-sm"
+        class="basic-pressable w-full h-[32px] bg-green-500 hover:bg-green-600 duration-300 text-white text-sm"
         type="submit"
         value="Crear Orden">
     <button
-        class="w-full h-[22px] bg-slate-500 hover:bg-slate-600 duration-300 text-white text-sm"
+        class="basic-pressable w-full h-[32px] bg-slate-500 hover:bg-slate-600 duration-300 text-white text-sm"
         hx-get="{% url "getAllOrders" %}"
         hx-target="#create_or_edit_order"
         hx-swap="outerHTML transition:true">
