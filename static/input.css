@@ -5,29 +5,35 @@
 }
 
 @layer components {
-  /* === BASIC === */
-  .basic-container {
+  .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .row {
+    @apply flex justify-center items-center flex-row;
+  }
+  
+  .column {
+    @apply flex justify-center items-center flex-col;
+  }
+  
+  .basic-container {
+    @apply flex justify-center items-center;
+  }
+
   .basic-header {
     text-align: center;
-    font-weight: 700;
-    color: #1e293b; /* text-slate-800 */
+    font-weight: 500;
+    color: #1e293b;
+    font-size: clamp(1.25rem, 1.5vw + 0.5rem, 2rem);
   }
 
   .basic-text {
+    color: #1e293b;
     font-size: clamp(1.125rem, 1vw + 0.25rem, 1.5rem);
   }
-
-  .basic-title {
-    font-size: clamp(1.25rem, 1.5vw + 0.5rem, 2rem);
-    text-align: center;
-    font-weight: 500;
-  }
-  
 
   .basic-input {
     font-size: clamp(1.25rem, 2vw, 2.25rem);
@@ -43,9 +49,7 @@
   }
 
   .basic-pressable {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @apply flex justify-center items-center;
     border-radius: 0.125rem;
   }
 
