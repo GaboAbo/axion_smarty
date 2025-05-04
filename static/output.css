@@ -340,9 +340,6 @@
   .h-\[32px\] {
     height: 32px;
   }
-  .h-\[34px\] {
-    height: 34px;
-  }
   .h-\[44px\] {
     height: 44px;
   }
@@ -411,9 +408,6 @@
   }
   .w-\[32px\] {
     width: 32px;
-  }
-  .w-\[34px\] {
-    width: 34px;
   }
   .w-\[58px\] {
     width: 58px;
@@ -867,8 +861,9 @@
     font-size: clamp(1.25rem, 1.5vw + 0.5rem, 2rem);
   }
   .basic-text {
+    font-weight: 300;
     color: #1e293b;
-    font-size: clamp(1.125rem, 1vw + 0.25rem, 1.5rem);
+    font-size: clamp(1rem, 1vw + 0.25rem, 1.25rem);
   }
   .basic-input {
     font-size: clamp(1.25rem, 2vw, 2.25rem);
