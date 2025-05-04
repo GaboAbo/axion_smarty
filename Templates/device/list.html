@@ -1,6 +1,6 @@
 {% load static %}
 
-<div id="device_list" class="w-full flex flex-col">
+<div id="device_list" class="w-full flex flex-col items-start">
     <div class="basic-container w-full h-1/12 mb-[10px] bg-slate-50 text-xl font-bold">
         <p>Listado de Equipos</p>
     </div>
@@ -41,9 +41,9 @@
     </div>
     
     <div class="w-full h-8/12 overflow-y-scroll">
-        <table id="device_table" class="table-auto w-full h-full text-sm">
+        <table id="device_table" class="table-auto w-full text-sm">
             <thead class="sticky top-0 bg-slate-50">
-                <tr class="h-[68px]">
+                <tr class="h-[48px] my-2">
                     <th style="width:21%">Modelo</th>
                     <th style="width:21%">Serie</th>
                     <th style="width:43%">Cliente</th>

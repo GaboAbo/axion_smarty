@@ -1,6 +1,6 @@
 {% load static %}
 
-<div id="order_list" class="w-full flex flex-col">
+<div id="order_list" class="w-full flex flex-col items-start">
     <div class="basic-container w-full h-1/12 mb-[10px] bg-slate-50 text-xl font-bold">
         <p>Listado de Ordenes</p>
     </div>
@@ -65,9 +65,9 @@
     </div>
     
     <div class="w-full h-8/12 overflow-y-scroll">
-        <table id="order_table" class="table-auto w-full h-full text-sm">
+        <table id="order_table" class="table-auto w-full text-sm">
             <thead class="sticky top-0 bg-slate-50">
-                <tr class="h-full">
+                <tr class="h-[48px] my-2">
                     <th style="width:5%">ID</th>
                     <th style="width:45%">Cliente</th>
                     <th style="width:16%">Ingeniero</th>
