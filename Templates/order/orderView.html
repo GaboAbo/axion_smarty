@@ -1,10 +1,10 @@
 {% load static %}
 
-<div id="order_view" class="w-5/6 h-[620px]">
+<div id="order_view" class="w-5/6 h-[90%]">
     <div class="w-full h-[30px] mb-[10px] bg-slate-50 flex justify-center text-xl font-bold">
         <p>Detalle de Orden #{{ order.pk }}</p>
     </div>
-    <div class="w-full h-[90px] mb-[10px] bg-slate-50 flex flex-row">
+    <div class="w-full h-1/5 mb-[10px] bg-slate-50 flex flex-row">
         <div class="w-full h-full grid grid-cols-6 p-4 gap-x-4">
             <div class="h-[24px] px-2 text-sm col-span-4"><b>Cliente</b>: {{ order.client.name }}</div>
             <div class="h-[24px] px-2 text-sm"><b>Estado</b>: {{ order.get_status_display }}</div>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full h-[480px] bg-slate-50 overflow-y-scroll">
+    <div class="w-full h-4/5 bg-slate-50 overflow-y-scroll">
         <table id="device_table" class="table-auto w-full h-full text-sm">
             <thead class="sticky top-0 bg-slate-50">
                 <tr class="h-[68px]">
