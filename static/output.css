@@ -340,6 +340,9 @@
   .h-\[32px\] {
     height: 32px;
   }
+  .h-\[34px\] {
+    height: 34px;
+  }
   .h-\[44px\] {
     height: 44px;
   }
@@ -408,6 +411,9 @@
   }
   .w-\[32px\] {
     width: 32px;
+  }
+  .w-\[34px\] {
+    width: 34px;
   }
   .w-\[58px\] {
     width: 58px;
