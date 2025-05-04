@@ -340,11 +340,20 @@
   .h-1\/5 {
     height: calc(1/5 * 100%);
   }
+  .h-1\/12 {
+    height: calc(1/12 * 100%);
+  }
+  .h-2\/12 {
+    height: calc(2/12 * 100%);
+  }
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
   .h-4\/5 {
     height: calc(4/5 * 100%);
+  }
+  .h-8\/12 {
+    height: calc(8/12 * 100%);
   }
   .h-\[5\%\] {
     height: 5%;
