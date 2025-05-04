@@ -38,6 +38,7 @@
                 hx-swap="innerHTML transition:true"
                 hx-trigger="click"
                 onclick="htmx.ajax('GET', '{% url 'sidebar' %}?tab=order', '#sidebar')">
+                <img src="{% static 'icons/book-outlined.svg' %}" />
                 ORDENES
             </button>
         
@@ -49,6 +50,7 @@
                 hx-swap="innerHTML transition:true"
                 hx-trigger="click"
                 onclick="htmx.ajax('GET', '{% url 'sidebar' %}?tab=device', '#sidebar')">
+                <img src="{% static 'icons/setting-outlined.svg' %}" />
                 EQUIPOS
             </button>
         
