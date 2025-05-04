@@ -1,6 +1,6 @@
 {% load static %}
 
-<div id="device_list" class="w-full flex flex-col items-start">
+<div id="device_list" class="w-full h-full flex flex-col items-start">
     <div class="basic-container w-full h-[48px] mb-[10px] bg-slate-50 text-xl font-bold">
         <p>Listado de Equipos</p>
     </div>
@@ -30,7 +30,7 @@
                 name="contract"
                 placeholder="Buscar por Contrato">
             <input
-                class="row-start-1 col-start-5 ml-[148px] w-[58px] row-span-2 rounded-sm bg-slate-200 hover:bg-slate-500 duration-150 text-white text-5xl"
+                class="row-start-1 col-start-5 ml-[148px] w-[58px] h-[58px] row-span-2 rounded-sm bg-slate-200 hover:bg-slate-500 duration-150 text-white text-5xl"
                 hx-get="{% url "filterDevice" %}"
                 hx-trigger="click delay:250ms"
                 hx-target="#table_data"
