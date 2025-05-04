@@ -388,6 +388,9 @@
   .h-\[58px\] {
     height: 58px;
   }
+  .h-\[60px\] {
+    height: 60px;
+  }
   .h-\[68px\] {
     height: 68px;
   }
@@ -578,6 +581,9 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .overflow-y-scroll {
     overflow-y: scroll;

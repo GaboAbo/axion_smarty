@@ -1,10 +1,10 @@
 {% load static %}
 
 <div id="device_list" class="w-full flex flex-col items-start">
-    <div class="basic-container w-full h-1/12 mb-[10px] bg-slate-50 text-xl font-bold">
+    <div class="basic-container w-full h-[48px] mb-[10px] bg-slate-50 text-xl font-bold">
         <p>Listado de Equipos</p>
     </div>
-    <div class="w-full h-2/12 mb-[10px] bg-slate-50 flex flex-row">
+    <div class="w-full h-[60px] mb-[10px] bg-slate-50 flex flex-row">
         <form
             id="filter"
             class="w-11/12 h-full grid grid-cols-5 p-4 gap-x-4 gap-y-1"
@@ -40,7 +40,7 @@
         </form>
     </div>
     
-    <div class="w-full h-8/12 overflow-y-scroll">
+    <div class="w-full overflow-y-auto">
         <table id="device_table" class="table-auto w-full text-sm">
             <thead class="sticky top-0 bg-slate-50">
                 <tr class="h-[48px] my-2">
