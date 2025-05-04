@@ -3,24 +3,26 @@
     class="absolute bottom-0 r-1/2 w-full h-[44px] bg-white/50 flex justify-around font-semibold">
 
     <button
-        class="w-1/2 h-[44px] {% if active_tab == 'order' %}bg-blue-500 text-white{% else %}bg-transparent hover:bg-slate-600/20 duration-300{% endif %}"
+        class="w-1/2 h-[44px] flex-center {% if active_tab == 'order' %}bg-blue-500 text-white{% else %}bg-transparent hover:bg-slate-600/20 duration-300{% endif %}"
         type="button"
         hx-get="{% url 'getAllOrders' %}"
         hx-target="#menu"
         hx-swap="innerHTML transition:true"
         hx-trigger="click"
         onclick="htmx.ajax('GET', '{% url 'sidebar' %}?tab=order', '#sidebar')">
+        <img src="{% static 'icons/book-outlined.svg' %}" alt="order" class="w-[24px] h-[24px]" />
         ORDENES
     </button>
-
+        
     <button
-        class="w-1/2 h-[44px] {% if active_tab == 'device' %}bg-blue-500 text-white{% else %}bg-transparent hover:bg-slate-600/20 duration-300{% endif %}"
+        class="w-1/2 h-[44px] flex-center {% if active_tab == 'device' %}bg-blue-500 text-white{% else %}bg-transparent hover:bg-slate-600/20 duration-300{% endif %}"
         type="button"
         hx-get="{% url 'getAllDevices' %}"
         hx-target="#menu"
         hx-swap="innerHTML transition:true"
         hx-trigger="click"
         onclick="htmx.ajax('GET', '{% url 'sidebar' %}?tab=device', '#sidebar')">
+        <img src="{% static 'icons/setting-outlined.svg' %}" alt="settings" class="w-[24px] h-[24px]" />
         EQUIPOS
     </button>
 
