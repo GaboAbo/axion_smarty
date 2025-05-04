@@ -15,7 +15,7 @@
     <body class="basic-container w-full h-screen font-roboto text-slate-700 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300">
         <div class="absolute top-0 r-1/2 w-full h-[5%] flex justify-around font-semibold">
             <div class="w-5/6 h-full flex items-center">
-                <p class="px-2">Bienvenid@, {{ full_name }}</p>
+                <p class="px-2 basic-text">Bienvenid@, {{ full_name }}</p>
             </div>
             <form method="post" action="{% url 'logout' %}" class="w-1/6 h-full">
                 {% csrf_token %}
