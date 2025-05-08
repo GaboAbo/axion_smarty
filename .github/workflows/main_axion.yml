@@ -45,11 +45,23 @@ jobs:
           
       - name: Create Django superuser
         run: |
-          docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); if not User.objects.filter(username='${{ secrets.DJANGO_SUPERUSER_NAME }}').exists(): User.objects.create_superuser('${{ secrets.DJANGO_SUPERUSER_NAME }}', '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}')"
+          docker run --rm \
+            -e ENV=production \
+            -e DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
+            ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest \
+            python manage.py shell -c "
+            from django.contrib.auth import get_user_model;
+            User = get_user_model();
+            if not User.objects.filter(username='${{ secrets.DJANGO_SUPERUSER_NAME }}').exists():
+                User.objects.create_superuser(
+                    '${{ secrets.DJANGO_SUPERUSER_NAME }}', 
+                    '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', 
+                    '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}'
+                )"
         env:
           ENV: production
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-          
+
       - name: Push image to ACR
         run: |
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest
