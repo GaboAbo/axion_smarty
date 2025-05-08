@@ -46,8 +46,6 @@ jobs:
       - name: Create Django superuser
         run: |
           docker run --rm \
-            -e ENV=production \
-            -e DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} \
             ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest \
             python manage.py shell -c "
             from django.contrib.auth import get_user_model;
