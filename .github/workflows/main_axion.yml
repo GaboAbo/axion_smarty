@@ -36,25 +36,16 @@ jobs:
         run: |
           docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest .
 
-      - name: Run Django tests
+      - name: Collect static files
         run: |
-          docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py test
+          docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py collectstatic --noinput
         env:
           ENV: production
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
           
-      - name: Create Django superuser
+      - name: Run Django tests
         run: |
-          docker run --rm \
-          ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest \
-          python manage.py shell -c "
-          from django.contrib.auth import get_user_model;
-          User = get_user_model();
-          if not User.objects.filter(username='${{ secrets.DJANGO_SUPERUSER_NAME }}').exists():
-              User.objects.create_superuser(
-                  '${{ secrets.DJANGO_SUPERUSER_NAME }}', 
-                  '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', 
-                  '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}')"
+          docker run --rm ${{ secrets.ACR_LOGIN_SERVER }}/${{ secrets.ACR_REPO }}:latest python manage.py test
         env:
           ENV: production
           DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
