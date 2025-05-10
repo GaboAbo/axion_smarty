@@ -21,7 +21,7 @@ from oauth2_provider import urls as oauth2_urls
 
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', include("App.urls")),
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
 ]
