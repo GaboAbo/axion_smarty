@@ -1,3 +1,7 @@
+"""
+Unit tests for the Order and MaintenanceProtocol models.
+"""
+
 from django.test import TestCase
 from django.utils import timezone
 from datetime import timedelta
@@ -7,16 +11,32 @@ from Entity.models import Entity, Contract
 from Device.models import Device, DeviceModel
 from Order.models import Order, MaintenanceProtocol
 
-# Create your tests here.
+
 class OrderModelTest(TestCase):
+    """
+    Test case for Order and MaintenanceProtocol model behaviors.
+    """
+
     def setUp(self):
-        # Create Entity
+        """
+        Create related models for testing:
+        - Entity (client)
+        - Engineer
+        - Client AuthUser
+        - Contract
+        - DeviceModel
+        - Device
+        - Order (with M2M device)
+        - MaintenanceProtocol
+        """
+
+        # Entity (acts as the client organization)
         self.client = Entity.objects.create(
             name="Test Clinic",
             address="123 Main Street"
         )
 
-        # Create Engineer
+        # Engineer user
         self.engineer = Engineer.objects.create_user(
             username="testengineer",
             password="securepass123",
@@ -29,7 +49,7 @@ class OrderModelTest(TestCase):
             is_staff=False
         )
 
-        # Create Client
+        # Individual Client (AuthUser role)
         self.client_AuthUser = Client.objects.create(
             first_name="Foo",
             last_name="Fighter",
@@ -37,7 +57,7 @@ class OrderModelTest(TestCase):
             role="TEN"
         )
 
-        # Create Contract
+        # Contract between the Entity and system
         self.contract = Contract.objects.create(
             entity=self.client,
             number=1001,
@@ -46,14 +66,14 @@ class OrderModelTest(TestCase):
             end_date=timezone.now().date() + timedelta(days=365)
         )
 
-        # Create DeviceModel
+        # Device model reference
         self.device_model = DeviceModel.objects.create(
             device_type="END",
             device_gen="EX3",
             part_number="GIF-H190"
         )
 
-        # Create Device
+        # Physical device instance
         self.device = Device.objects.create(
             client=self.client,
             contract=self.contract,
@@ -61,7 +81,7 @@ class OrderModelTest(TestCase):
             serial_number="SN123456"
         )
 
-        # Create Order
+        # Create an order for maintenance
         self.order = Order.objects.create(
             engineer=self.engineer,
             client=self.client,
@@ -70,10 +90,10 @@ class OrderModelTest(TestCase):
             status="PR"
         )
 
-        # Associate Device with Order (M2M)
+        # Associate the device with the order (M2M)
         self.order.device.set([self.device])
 
-        # Create MaintenanceProtocol
+        # MaintenanceProtocol attached to the order/device
         self.protocol = MaintenanceProtocol.objects.create(
             order=self.order,
             device=self.device,
@@ -82,8 +102,15 @@ class OrderModelTest(TestCase):
         )
 
     def test_order_str_representation(self):
-        self.assertEqual(str(self.order), f"Order {self.order.pk} - Estado: PR")
+        """
+        Test the __str__ method of the Order model.
+        """
+        expected = f"Order {self.order.pk} - Estado: PR"
+        self.assertEqual(str(self.order), expected)
 
     def test_protocol_str_representation(self):
-        expected_str = f"{self.device.device_model.part_number} - {self.device.serial_number}: SR"
-        self.assertEqual(str(self.protocol), expected_str)
+        """
+        Test the __str__ method of the MaintenanceProtocol model.
+        """
+        expected = f"{self.device.device_model.part_number} - {self.device.serial_number}: SR"
+        self.assertEqual(str(self.protocol), expected)

@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order package &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Order.migrations package" href="Order.migrations.html" />
+    <link rel="prev" title="MicrosoftAuth package" href="MicrosoftAuth.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">axion_smarty-main</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="App.html">App package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.html">AuthUser package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Device.html">Device package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entity.html">Entity package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MicrosoftAuth.html">MicrosoftAuth package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Order package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html">Order.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.admin">Order.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.apps">Order.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Order.apps.OrderConfig"><code class="docutils literal notranslate"><span class="pre">OrderConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.forms">Order.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Order.forms.OrderForm"><code class="docutils literal notranslate"><span class="pre">OrderForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.models">Order.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Order.models.MaintenanceProtocol"><code class="docutils literal notranslate"><span class="pre">MaintenanceProtocol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Order.models.Order"><code class="docutils literal notranslate"><span class="pre">Order</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.serializers">Order.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Order.serializers.MaintenanceListSerializer"><code class="docutils literal notranslate"><span class="pre">MaintenanceListSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Order.serializers.MaintenanceSerializer"><code class="docutils literal notranslate"><span class="pre">MaintenanceSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Order.serializers.OrderListSerializer"><code class="docutils literal notranslate"><span class="pre">OrderListSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Order.serializers.OrderSerializer"><code class="docutils literal notranslate"><span class="pre">OrderSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.tests">Order.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Order.tests.OrderModelTest"><code class="docutils literal notranslate"><span class="pre">OrderModelTest</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.urls">Order.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order.views">Order.views module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Order">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">axion_smarty-main</a></li>
+      <li class="breadcrumb-item active">Order package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Order.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="order-package">
+<h1>Order package<a class="headerlink" href="#order-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Order.migrations.html">Order.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations.0001_initial">Order.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Order.migrations.html#Order.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations.0002_order_client_name">Order.migrations.0002_order_client_name module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Order.migrations.html#Order.migrations.0002_order_client_name.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0002_order_client_name.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0002_order_client_name.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations.0003_rename_client_name_order_client_personal_name">Order.migrations.0003_rename_client_name_order_client_personal_name module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Order.migrations.html#Order.migrations.0003_rename_client_name_order_client_personal_name.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0003_rename_client_name_order_client_personal_name.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0003_rename_client_name_order_client_personal_name.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations.0004_alter_maintenanceprotocol_location">Order.migrations.0004_alter_maintenanceprotocol_location module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Order.migrations.html#Order.migrations.0004_alter_maintenanceprotocol_location.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0004_alter_maintenanceprotocol_location.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0004_alter_maintenanceprotocol_location.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations.0005_alter_maintenanceprotocol_status_and_more">Order.migrations.0005_alter_maintenanceprotocol_status_and_more module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Order.migrations.html#Order.migrations.0005_alter_maintenanceprotocol_status_and_more.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0005_alter_maintenanceprotocol_status_and_more.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Order.migrations.html#Order.migrations.0005_alter_maintenanceprotocol_status_and_more.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Order.migrations.html#module-Order.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Order.admin">
+<span id="order-admin-module"></span><h2>Order.admin module<a class="headerlink" href="#module-Order.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Order.apps">
+<span id="order-apps-module"></span><h2>Order.apps module<a class="headerlink" href="#module-Order.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.apps.OrderConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.apps.</span></span><span class="sig-name descname"><span class="pre">OrderConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/apps.html#OrderConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.apps.OrderConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.apps.OrderConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#Order.apps.OrderConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.apps.OrderConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Order'</span></em><a class="headerlink" href="#Order.apps.OrderConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Order.forms">
+<span id="order-forms-module"></span><h2>Order.forms module<a class="headerlink" href="#module-Order.forms" title="Link to this heading"></a></h2>
+<p>Forms for the Order app.</p>
+<p>Includes ModelForm definitions for creating and updating Order instances.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.forms.OrderForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.forms.</span></span><span class="sig-name descname"><span class="pre">OrderForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/forms.html#OrderForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.forms.OrderForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<p>Form for creating and updating Order instances.
+Applies consistent styling to each field using Tailwind CSS classes.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Order/forms.html#OrderForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.forms.OrderForm.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['client',</span> <span class="pre">'contract',</span> <span class="pre">'device',</span> <span class="pre">'status',</span> <span class="pre">'engineer']</span></em><a class="headerlink" href="#Order.forms.OrderForm.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Order.forms.OrderForm.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Order.models.Order" title="Order.models.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.Meta.widgets">
+<span class="sig-name descname"><span class="pre">widgets</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'client':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;,</span> <span class="pre">'contract':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;,</span> <span class="pre">'device':</span> <span class="pre">&lt;django.forms.widgets.SelectMultiple</span> <span class="pre">object&gt;,</span> <span class="pre">'engineer':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;,</span> <span class="pre">'status':</span> <span class="pre">&lt;django.forms.widgets.Select</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Order.forms.OrderForm.Meta.widgets" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'client':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'contract':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'device':</span> <span class="pre">&lt;django.forms.models.ModelMultipleChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'engineer':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'status':</span> <span class="pre">&lt;django.forms.fields.TypedChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#Order.forms.OrderForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#Order.forms.OrderForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="Order.forms.OrderForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#Order.forms.OrderForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Order.models">
+<span id="order-models-module"></span><h2>Order.models module<a class="headerlink" href="#module-Order.models" title="Link to this heading"></a></h2>
+<p>Models for managing maintenance orders and protocols.</p>
+<p>Includes:
+- Order: Represents a work order for one or more devices.
+- MaintenanceProtocol: Stores the maintenance report for a device in an order.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.models.</span></span><span class="sig-name descname"><span class="pre">MaintenanceProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/models.html#MaintenanceProtocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.models.MaintenanceProtocol" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Stores the results of a maintenance protocol for a specific device within an order.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><p>device: The device being serviced.
+order: The order under which this protocol is executed.
+status: Final operational status of the device after maintenance.
+location: Physical location of the device during maintenance.
+fields: Flexible data for recording custom protocol fields (e.g., measurements, checklists).</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.MAINTENANCE_STATUS">
+<span class="sig-name descname"><span class="pre">MAINTENANCE_STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('SR',</span> <span class="pre">'Sin</span> <span class="pre">revisar'),</span> <span class="pre">('EPEN',</span> <span class="pre">'Equipo</span> <span class="pre">pendiente'),</span> <span class="pre">('OPSO',</span> <span class="pre">'Equipo</span> <span class="pre">operativo</span> <span class="pre">sin</span> <span class="pre">observaciones'),</span> <span class="pre">('OPCO',</span> <span class="pre">'Equipo</span> <span class="pre">operativo</span> <span class="pre">con</span> <span class="pre">observaciones'),</span> <span class="pre">('SSTT',</span> <span class="pre">'Equipo</span> <span class="pre">se</span> <span class="pre">encuentra</span> <span class="pre">en</span> <span class="pre">servicio</span> <span class="pre">técnico'),</span> <span class="pre">('ERBJ',</span> <span class="pre">'Equipo</span> <span class="pre">reportado</span> <span class="pre">de</span> <span class="pre">baja'),</span> <span class="pre">('ENDB',</span> <span class="pre">'Equipo</span> <span class="pre">no</span> <span class="pre">disponible')]</span></em><a class="headerlink" href="#Order.models.MaintenanceProtocol.MAINTENANCE_STATUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.device">
+<span class="sig-name descname"><span class="pre">device</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.device" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.device_id">
+<span class="sig-name descname"><span class="pre">device_id</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.device_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.fields" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Order.models.MaintenanceProtocol.get_status_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.location" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Order.models.MaintenanceProtocol.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.order" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.order_id">
+<span class="sig-name descname"><span class="pre">order_id</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.order_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.MaintenanceProtocol.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#Order.models.MaintenanceProtocol.status" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.models.Order">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.models.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/models.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.models.Order" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a work order assigned to an engineer for one or more devices.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><p>engineer: The engineer responsible for the order.
+client: The institution or client receiving the service.
+contract: Optional contract linked to the order.
+client_AuthUser: The authenticated client user, if applicable.
+device: Devices included in the order.
+created_at: Timestamp of order creation.
+client_personal_name: Name of the client representative.
+client_sign: Signature of the client representative.
+status: Current status of the order (Scheduled, Completed, Delayed).</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Order.models.Order.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Order.models.Order.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Order.models.Order.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Order.models.Order.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.ORDER_STATUS">
+<span class="sig-name descname"><span class="pre">ORDER_STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('PR',</span> <span class="pre">'Programada'),</span> <span class="pre">('CT',</span> <span class="pre">'Completada'),</span> <span class="pre">('AT',</span> <span class="pre">'Atradasa')]</span></em><a class="headerlink" href="#Order.models.Order.ORDER_STATUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client">
+<span class="sig-name descname"><span class="pre">client</span></span><a class="headerlink" href="#Order.models.Order.client" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client_AuthUser">
+<span class="sig-name descname"><span class="pre">client_AuthUser</span></span><a class="headerlink" href="#Order.models.Order.client_AuthUser" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client_AuthUser_id">
+<span class="sig-name descname"><span class="pre">client_AuthUser_id</span></span><a class="headerlink" href="#Order.models.Order.client_AuthUser_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client_id">
+<span class="sig-name descname"><span class="pre">client_id</span></span><a class="headerlink" href="#Order.models.Order.client_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client_personal_name">
+<span class="sig-name descname"><span class="pre">client_personal_name</span></span><a class="headerlink" href="#Order.models.Order.client_personal_name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.client_sign">
+<span class="sig-name descname"><span class="pre">client_sign</span></span><a class="headerlink" href="#Order.models.Order.client_sign" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.contract">
+<span class="sig-name descname"><span class="pre">contract</span></span><a class="headerlink" href="#Order.models.Order.contract" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.contract_id">
+<span class="sig-name descname"><span class="pre">contract_id</span></span><a class="headerlink" href="#Order.models.Order.contract_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#Order.models.Order.created_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.device">
+<span class="sig-name descname"><span class="pre">device</span></span><a class="headerlink" href="#Order.models.Order.device" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.engineer">
+<span class="sig-name descname"><span class="pre">engineer</span></span><a class="headerlink" href="#Order.models.Order.engineer" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.engineer_id">
+<span class="sig-name descname"><span class="pre">engineer_id</span></span><a class="headerlink" href="#Order.models.Order.engineer_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.models.Order.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Order.models.Order.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.models.Order.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Order.models.Order.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.models.Order.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Order.models.Order.get_status_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Order.models.Order.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.maintenanceprotocol_set">
+<span class="sig-name descname"><span class="pre">maintenanceprotocol_set</span></span><a class="headerlink" href="#Order.models.Order.maintenanceprotocol_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Order.models.Order.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.models.Order.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#Order.models.Order.status" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Order.serializers">
+<span id="order-serializers-module"></span><h2>Order.serializers module<a class="headerlink" href="#module-Order.serializers" title="Link to this heading"></a></h2>
+<p>Serializers for Orders and Maintenance Protocols.</p>
+<p>Includes:
+- MaintenanceListSerializer: Summary view of maintenance protocol.
+- MaintenanceSerializer: Detailed view of maintenance protocol.
+- OrderListSerializer: Lightweight serializer for listing orders.
+- OrderSerializer: Full order details with nested maintenance protocols.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceListSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.serializers.</span></span><span class="sig-name descname"><span class="pre">MaintenanceListSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/serializers.html#MaintenanceListSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.MaintenanceListSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="App.html#App.serializers.ParentSerializer" title="App.serializers.ParentSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParentSerializer</span></code></a></p>
+<p>A lightweight serializer for listing maintenance protocols.
+Includes basic device and order info.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceListSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Order/serializers.html#MaintenanceListSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.MaintenanceListSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceListSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'order',</span> <span class="pre">'device_type',</span> <span class="pre">'device_model',</span> <span class="pre">'device_serial',</span> <span class="pre">'device_contract',</span> <span class="pre">'location',</span> <span class="pre">'status']</span></em><a class="headerlink" href="#Order.serializers.MaintenanceListSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceListSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Order.serializers.MaintenanceListSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Order.models.MaintenanceProtocol" title="Order.models.MaintenanceProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaintenanceProtocol</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.serializers.</span></span><span class="sig-name descname"><span class="pre">MaintenanceSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/serializers.html#MaintenanceSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.MaintenanceSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="App.html#App.serializers.ParentSerializer" title="App.serializers.ParentSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParentSerializer</span></code></a></p>
+<p>A detailed serializer for individual maintenance protocols.
+Includes editable custom fields.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Order/serializers.html#MaintenanceSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.MaintenanceSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'order',</span> <span class="pre">'device_type',</span> <span class="pre">'device_model',</span> <span class="pre">'device_serial',</span> <span class="pre">'device_contract',</span> <span class="pre">'location',</span> <span class="pre">'status',</span> <span class="pre">'fields']</span></em><a class="headerlink" href="#Order.serializers.MaintenanceSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.MaintenanceSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Order.serializers.MaintenanceSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Order.models.MaintenanceProtocol" title="Order.models.MaintenanceProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaintenanceProtocol</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.OrderListSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.serializers.</span></span><span class="sig-name descname"><span class="pre">OrderListSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/serializers.html#OrderListSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.OrderListSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>A simplified serializer used for listing orders.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.OrderListSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Order/serializers.html#OrderListSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.OrderListSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.OrderListSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'client_name',</span> <span class="pre">'client_address',</span> <span class="pre">'created_at',</span> <span class="pre">'status',</span> <span class="pre">'client_sign',</span> <span class="pre">'client_personal_name']</span></em><a class="headerlink" href="#Order.serializers.OrderListSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.OrderListSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Order.serializers.OrderListSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Order.models.Order" title="Order.models.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.OrderSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.serializers.</span></span><span class="sig-name descname"><span class="pre">OrderSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/serializers.html#OrderSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.OrderSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>A detailed serializer for a single order.
+Includes related maintenance protocols.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.serializers.OrderSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Order/serializers.html#OrderSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.OrderSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.OrderSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'client_name',</span> <span class="pre">'client_address',</span> <span class="pre">'created_at',</span> <span class="pre">'status',</span> <span class="pre">'maintenance_protocols',</span> <span class="pre">'client_sign',</span> <span class="pre">'client_personal_name']</span></em><a class="headerlink" href="#Order.serializers.OrderSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Order.serializers.OrderSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Order.serializers.OrderSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Order.models.Order" title="Order.models.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.serializers.OrderSerializer.get_maintenance_protocols">
+<span class="sig-name descname"><span class="pre">get_maintenance_protocols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/serializers.html#OrderSerializer.get_maintenance_protocols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.serializers.OrderSerializer.get_maintenance_protocols" title="Link to this definition"></a></dt>
+<dd><p>Returns all maintenance protocols associated with this order.
+Uses a simplified serializer but includes all fields.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Order.tests">
+<span id="order-tests-module"></span><h2>Order.tests module<a class="headerlink" href="#module-Order.tests" title="Link to this heading"></a></h2>
+<p>Unit tests for the Order and MaintenanceProtocol models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Order.tests.OrderModelTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Order.tests.</span></span><span class="sig-name descname"><span class="pre">OrderModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/tests.html#OrderModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.tests.OrderModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for Order and MaintenanceProtocol model behaviors.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.tests.OrderModelTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/tests.html#OrderModelTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.tests.OrderModelTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Create related models for testing:
+- Entity (client)
+- Engineer
+- Client AuthUser
+- Contract
+- DeviceModel
+- Device
+- Order (with M2M device)
+- MaintenanceProtocol</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.tests.OrderModelTest.test_order_str_representation">
+<span class="sig-name descname"><span class="pre">test_order_str_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/tests.html#OrderModelTest.test_order_str_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.tests.OrderModelTest.test_order_str_representation" title="Link to this definition"></a></dt>
+<dd><p>Test the __str__ method of the Order model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Order.tests.OrderModelTest.test_protocol_str_representation">
+<span class="sig-name descname"><span class="pre">test_protocol_str_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Order/tests.html#OrderModelTest.test_protocol_str_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Order.tests.OrderModelTest.test_protocol_str_representation" title="Link to this definition"></a></dt>
+<dd><p>Test the __str__ method of the MaintenanceProtocol model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Order.urls">
+<span id="order-urls-module"></span><h2>Order.urls module<a class="headerlink" href="#module-Order.urls" title="Link to this heading"></a></h2>
+<p>URL routing configuration for the ‘Order’ domain.</p>
+<p>This module defines API routes for working with maintenance orders and protocols,
+including viewsets for read/write operations, as well as utility endpoints for
+querying devices, contracts, and related protocols.</p>
+<dl class="simple">
+<dt>Routes:</dt><dd><ul class="simple">
+<li><p>‘order/’ → DRF ViewSet for Order model (CRUD operations)</p></li>
+<li><p>‘protocol/’ → DRF ViewSet for MaintenanceProtocol model</p></li>
+<li><p>‘orders/all/’ → List all orders</p></li>
+<li><p>‘orders/filter/’ → Filter orders by query parameters</p></li>
+<li><p>‘orders/&lt;order_id&gt;/’ → Retrieve an order by ID</p></li>
+<li><p>‘orders/create/’ → Create a new order</p></li>
+<li><p>‘orders/&lt;order_pk&gt;/update/’ → Update an existing order</p></li>
+<li><p>‘orders/&lt;order_pk&gt;/delete/’ → Delete an order</p></li>
+<li><p>‘orders/&lt;order_pk&gt;/protocols/’ → Get all protocols linked to an order</p></li>
+<li><p>‘devices/by-client/’ → Retrieve all devices linked to a client</p></li>
+<li><p>‘contracts/by-client/’ → Retrieve all contracts linked to a client</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="module-Order.views">
+<span id="order-views-module"></span><h2>Order.views module<a class="headerlink" href="#module-Order.views" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Order">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Order" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MicrosoftAuth.html" class="btn btn-neutral float-left" title="MicrosoftAuth package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Order.migrations.html" class="btn btn-neutral float-right" title="Order.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

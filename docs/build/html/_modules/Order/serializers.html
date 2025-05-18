@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order.serializers &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">axion_smarty-main</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Order.serializers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Order.serializers</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Serializers for Orders and Maintenance Protocols.</span>
+
+<span class="sd">Includes:</span>
+<span class="sd">- MaintenanceListSerializer: Summary view of maintenance protocol.</span>
+<span class="sd">- MaintenanceSerializer: Detailed view of maintenance protocol.</span>
+<span class="sd">- OrderListSerializer: Lightweight serializer for listing orders.</span>
+<span class="sd">- OrderSerializer: Full order details with nested maintenance protocols.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContentFile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">serializers</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Order</span><span class="p">,</span> <span class="n">MaintenanceProtocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">App.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParentSerializer</span>
+
+
+<div class="viewcode-block" id="MaintenanceListSerializer">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.MaintenanceListSerializer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MaintenanceListSerializer</span><span class="p">(</span><span class="n">ParentSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A lightweight serializer for listing maintenance protocols.</span>
+<span class="sd">    Includes basic device and order info.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">device_type</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.device_model.device_type.name&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_model</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.device_model.part_number&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_serial</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.serial_number&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_contract</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.contract&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MaintenanceListSerializer.Meta">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.MaintenanceListSerializer.Meta">[docs]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">MaintenanceProtocol</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;order&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_type&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_model&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_serial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_contract&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">,</span>
+        <span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MaintenanceSerializer">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.MaintenanceSerializer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MaintenanceSerializer</span><span class="p">(</span><span class="n">ParentSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A detailed serializer for individual maintenance protocols.</span>
+<span class="sd">    Includes editable custom fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">device_type</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.device_model.device_type.name&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_model</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.device_model.part_number&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_serial</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.serial_number&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">device_contract</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;device.contract&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MaintenanceSerializer.Meta">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.MaintenanceSerializer.Meta">[docs]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">MaintenanceProtocol</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;order&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_type&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_model&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_serial&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;device_contract&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;fields&quot;</span><span class="p">,</span>
+        <span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="OrderListSerializer">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.OrderListSerializer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderListSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simplified serializer used for listing orders.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">client_name</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;client.name&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">client_address</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;client.address&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%b. </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="OrderListSerializer.Meta">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.OrderListSerializer.Meta">[docs]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Order</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_name&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_address&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;status&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_sign&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_personal_name&quot;</span><span class="p">,</span>
+        <span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="OrderSerializer">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.OrderSerializer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A detailed serializer for a single order.</span>
+<span class="sd">    Includes related maintenance protocols.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">client_name</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;client.name&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">client_address</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;client.address&quot;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%b. </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">maintenance_protocols</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">SerializerMethodField</span><span class="p">()</span>
+
+<div class="viewcode-block" id="OrderSerializer.Meta">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.OrderSerializer.Meta">[docs]</a>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Order</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_name&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_address&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;status&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;maintenance_protocols&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_sign&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;client_personal_name&quot;</span><span class="p">,</span>
+        <span class="p">]</span></div>
+
+        
+<div class="viewcode-block" id="OrderSerializer.get_maintenance_protocols">
+<a class="viewcode-back" href="../../Order.html#Order.serializers.OrderSerializer.get_maintenance_protocols">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_maintenance_protocols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all maintenance protocols associated with this order.</span>
+<span class="sd">        Uses a simplified serializer but includes all fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;device_model&quot;</span><span class="p">,</span> <span class="s2">&quot;device_serial&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">]</span>
+        <span class="n">mts</span> <span class="o">=</span> <span class="n">MaintenanceProtocol</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MaintenanceSerializer</span><span class="p">(</span><span class="n">mts</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="p">},</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">data</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,15 +1,17 @@
 from django.db import models
+from Entity.models import Entity, Contract
 
-from Entity.models import Entity, Contract, Area
 
-
-# Create your models here.
 class DeviceModel(models.Model):
     """
-    It stores the Device Models generic information
-    device_type: Category
-    part_number: Device's part number
+    Stores generic information about a device model.
+
+    Fields:
+        device_type: Category of the device (e.g., processor, endoscope).
+        device_gen: Device generation or product series.
+        part_number: Manufacturer part number or model identifier.
     """
+
     TYPE_CHOICES = [
         ("END", "Endoscopio flexible"),
         ("VPR", "Procesador de video"),
@@ -22,6 +24,7 @@ class DeviceModel(models.Model):
         ("ECG", "Unidad de electrocirugía"),
         ("UDI", "Sistema de documentación"),
     ]
+
     GENERATION_CHOICES = [
         ("OPT", "Optera (170)"),
         ("EX3", "Exera III (190)"),
@@ -45,8 +48,9 @@ class DeviceModel(models.Model):
         ("PRO", "Serie PRO"),
         ("ULT", "Serie ULTRA"),
         ("FIB", "Fibroscopio de fibra óptica"),
-        ("NOG", "Sin generacion")
+        ("NOG", "Sin generacion"),
     ]
+
     device_type = models.CharField("Tipo", max_length=100, choices=TYPE_CHOICES)
     device_gen = models.CharField("Generacion", max_length=100, choices=GENERATION_CHOICES)
     part_number = models.CharField("Modelo", max_length=100)
@@ -61,20 +65,23 @@ class DeviceModel(models.Model):
 
 class Device(models.Model):
     """
-    It stores the Device specific information
-    client: User to visit
-    contract: Client's Contract, if exist
-    device_model: Device's generic information
-    serial_number: Comercial unique identifier
+    Stores a specific device instance tied to a client and contract.
+
+    Fields:
+        client: Entity that owns the device.
+        contract: Related contract if applicable.
+        device_model: Link to the device's generic model info.
+        serial_number: Unique serial number for identification.
     """
+
     client = models.ForeignKey(
-        "Entity.Entity",
+        Entity,
         verbose_name="Entidad",
         on_delete=models.CASCADE,
         null=True
     )
     contract = models.ForeignKey(
-        "Entity.Contract",
+        Contract,
         verbose_name="Contrato",
         on_delete=models.CASCADE,
         null=True,
@@ -95,4 +102,3 @@ class Device(models.Model):
 
     def __str__(self):
         return f"{self.device_model.part_number} - {self.serial_number}"
-    

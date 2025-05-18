@@ -1,14 +1,22 @@
-from django.db import models
+"""
+Models for the AuthUser app.
 
+Includes custom user models for Engineers and Clients who are associated with entities.
+"""
+
+from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 
-# Create your models here.
 class EnterpriseUser(models.Model):
-    # Child model for Enterprise users(Company that provide/receive services)
-    # entity: User entity
-    # role: User role
-    # sign: Signature for report purposes
+    """
+    Abstract base model for users belonging to an entity (company or institution).
+
+    Attributes:
+        entity (Entity): The entity (organization) the user is associated with.
+        role (str): The user's role within the entity, chosen from predefined choices.
+    """
+
     ROLE_CHOICES = [
         ("MAN", "Gerente"),
         ("ENG", "Ingeniero/a"),
@@ -21,8 +29,16 @@ class EnterpriseUser(models.Model):
         ("TEN", "Tens"),
     ]
 
-    entity = models.ForeignKey("Entity.Entity", verbose_name="Entidad", on_delete=models.CASCADE)
-    role = models.CharField("Cargo", max_length=50, choices=ROLE_CHOICES)
+    entity = models.ForeignKey(
+        "Entity.Entity",
+        verbose_name="Entidad",
+        on_delete=models.CASCADE
+    )
+    role = models.CharField(
+        "Cargo",
+        max_length=50,
+        choices=ROLE_CHOICES
+    )
 
     class Meta:
         abstract = True
@@ -32,6 +48,15 @@ class EnterpriseUser(models.Model):
 
 
 class Engineer(EnterpriseUser, AbstractUser):
+    """
+    Model representing an engineer, extending the base Django user and EnterpriseUser.
+
+    Attributes:
+        signature (str): The engineer’s signature (used in reports).
+        groups (ManyToMany): Groups the engineer belongs to.
+        user_permissions (ManyToMany): Permissions specific to the engineer.
+    """
+
     signature = models.TextField("Firma", null=True, blank=True)
 
     groups = models.ManyToManyField(
@@ -56,6 +81,14 @@ class Engineer(EnterpriseUser, AbstractUser):
 
 
 class Client(EnterpriseUser):
+    """
+    Model representing a client user.
+
+    Attributes:
+        first_name (str): Client’s first name.
+        last_name (str): Client’s last name.
+    """
+
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
 

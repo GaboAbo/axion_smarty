@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicrosoftAuth.functions &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">axion_smarty-main</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MicrosoftAuth.functions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MicrosoftAuth.functions</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jwt</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span><span class="o">,</span><span class="w"> </span><span class="nn">base64</span><span class="o">,</span><span class="w"> </span><span class="nn">environ</span><span class="o">,</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">rsa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.backends</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_backend</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">Encoding</span><span class="p">,</span> <span class="n">PublicFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticationFailed</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">Env</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39;ENV&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;development&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;production&#39;</span><span class="p">:</span>
+    <span class="n">environ</span><span class="o">.</span><span class="n">Env</span><span class="o">.</span><span class="n">read_env</span><span class="p">()</span>
+
+<span class="c1"># Environment Variables</span>
+<span class="n">TENANT</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s2">&quot;MICROSOFT_TENANT&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_microsoft_public_keys">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.functions.get_microsoft_public_keys">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_microsoft_public_keys</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://login.microsoftonline.com/</span><span class="si">{</span><span class="n">TENANT</span><span class="si">}</span><span class="s2">/discovery/v2.0/keys&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>  <span class="c1"># Raises an error for bad status codes</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keys&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="s2">&quot;No keys found in the response.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">keys</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error fetching Microsoft public keys: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="base64url_decode">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.functions.base64url_decode">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">base64url_decode</span><span class="p">(</span><span class="n">base64url</span><span class="p">):</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">base64url</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">base64url</span> <span class="o">+=</span> <span class="n">padding</span>
+    <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64decode</span><span class="p">(</span><span class="n">base64url</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="jwk_to_pem">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.functions.jwk_to_pem">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">jwk_to_pem</span><span class="p">(</span><span class="n">jwk</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">base64url_decode</span><span class="p">(</span><span class="n">jwk</span><span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">]),</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">base64url_decode</span><span class="p">(</span><span class="n">jwk</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]),</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">)</span>
+
+    <span class="n">rsa_key</span> <span class="o">=</span> <span class="n">rsa</span><span class="o">.</span><span class="n">RSAPublicNumbers</span><span class="p">(</span><span class="n">e</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">public_key</span><span class="p">(</span><span class="n">default_backend</span><span class="p">())</span>
+
+    <span class="n">pem</span> <span class="o">=</span> <span class="n">rsa_key</span><span class="o">.</span><span class="n">public_bytes</span><span class="p">(</span>
+        <span class="n">Encoding</span><span class="o">.</span><span class="n">PEM</span><span class="p">,</span>
+        <span class="n">PublicFormat</span><span class="o">.</span><span class="n">SubjectPublicKeyInfo</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">pem</span></div>
+
+
+
+<div class="viewcode-block" id="validate_microsoft_token">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.functions.validate_microsoft_token">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_microsoft_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">get_unverified_header</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+        <span class="c1"># Fetch public keys</span>
+        <span class="n">public_keys</span> <span class="o">=</span> <span class="n">get_microsoft_public_keys</span><span class="p">()</span>
+
+        <span class="c1"># Find the correct key based on the key ID (kid)</span>
+        <span class="n">rsa_key</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">public_keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;kid&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;kid&quot;</span><span class="p">]:</span>
+                <span class="n">rsa_key</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;kty&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;kty&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;kid&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;kid&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;use&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;use&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">],</span>
+                <span class="p">}</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rsa_key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="s2">&quot;Unable to find appropriate key.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s2">&quot;success&quot;</span>
+
+    <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">ExpiredSignatureError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="s2">&quot;Token has expired.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">InvalidTokenError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AuthenticationFailed</span><span class="p">(</span><span class="s2">&quot;Invalid token.&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,24 +1,44 @@
+"""
+Custom serializer base class for selective field serialization.
+
+This module defines a base serializer that allows dynamically including only
+specified fields via the serializer's context.
+"""
+
 from rest_framework import serializers
 
 
 class ParentSerializer(serializers.ModelSerializer):
     """
-    __init__ (overriden): Dinamically set the desired fields
+    A base serializer that allows dynamic inclusion of fields.
 
-    Gets the fields specified in the context, which is passed by the child serializer
+    This class enables child serializers to specify which fields to include
+    by passing a `fields` list in the serializer context.
 
-    If there are fields passed, converts such fields into a set and store it in allowed
-    Then, converts the Meta fields into a set and store it in existing
+    Behavior:
+        - If `fields` are passed in the context, only those fields will be retained.
+        - If no `fields` are passed, all fields defined in the Meta class will be included.
 
-    Arithmetic operations are allowed between sets, so allowed fields are subtracted from the existing fields
-    Finally, it iterates through the result from the previous operation and pops the remained fields from the Meta(not allowed)
+    Example:
+        ```python
+        serializer = MyChildSerializer(instance, context={'fields': ['id', 'name']})
+        ```
 
-    __init__ executes every time the constructor is called
-    As a result, if there are passed fields, the serializer will only include them
-    If there are not fields passed, it will not set any fields from the parent serializer
+    This approach is useful when building flexible APIs or reusable serializers.
     """
 
     def __init__(self, *args, **kwargs):
+        """
+        Override the default constructor to dynamically filter fields.
+
+        Args:
+            *args: Positional arguments passed to the parent constructor.
+            **kwargs: Keyword arguments passed to the parent constructor.
+
+        Notes:
+            - This method is called every time the serializer is instantiated.
+            - Fields specified in `context['fields']` will be the only ones included.
+        """
         super().__init__(*args, **kwargs)
         fields = self.context.get('fields', None)
         if fields:

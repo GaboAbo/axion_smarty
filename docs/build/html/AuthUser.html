@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuthUser package &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AuthUser.migrations package" href="AuthUser.migrations.html" />
+    <link rel="prev" title="App package" href="App.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">axion_smarty-main</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="App.html">App package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AuthUser package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html">AuthUser.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.admin">AuthUser.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.apps">AuthUser.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.apps.UserConfig"><code class="docutils literal notranslate"><span class="pre">UserConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.forms">AuthUser.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.forms.CustomLoginForm"><code class="docutils literal notranslate"><span class="pre">CustomLoginForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.models">AuthUser.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.models.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.models.Engineer"><code class="docutils literal notranslate"><span class="pre">Engineer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.models.EnterpriseUser"><code class="docutils literal notranslate"><span class="pre">EnterpriseUser</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.serializers">AuthUser.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.serializers.EngineerSerializer"><code class="docutils literal notranslate"><span class="pre">EngineerSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.tests">AuthUser.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.tests.ClientModelTestCase"><code class="docutils literal notranslate"><span class="pre">ClientModelTestCase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.tests.EngineerModelTestCase"><code class="docutils literal notranslate"><span class="pre">EngineerModelTestCase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.urls">AuthUser.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser.views">AuthUser.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#AuthUser.views.EngineerViewSet"><code class="docutils literal notranslate"><span class="pre">EngineerViewSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-AuthUser">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Device.html">Device package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entity.html">Entity package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MicrosoftAuth.html">MicrosoftAuth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Order.html">Order package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">axion_smarty-main</a></li>
+      <li class="breadcrumb-item active">AuthUser package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/AuthUser.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="authuser-package">
+<h1>AuthUser package<a class="headerlink" href="#authuser-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="AuthUser.migrations.html">AuthUser.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.migrations.html#module-AuthUser.migrations.0001_initial">AuthUser.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.migrations.html#module-AuthUser.migrations.0002_client_first_name_client_last_name">AuthUser.migrations.0002_client_first_name_client_last_name module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0002_client_first_name_client_last_name.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0002_client_first_name_client_last_name.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="AuthUser.migrations.html#AuthUser.migrations.0002_client_first_name_client_last_name.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.migrations.html#module-AuthUser.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AuthUser.admin">
+<span id="authuser-admin-module"></span><h2>AuthUser.admin module<a class="headerlink" href="#module-AuthUser.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-AuthUser.apps">
+<span id="authuser-apps-module"></span><h2>AuthUser.apps module<a class="headerlink" href="#module-AuthUser.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.apps.UserConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.apps.</span></span><span class="sig-name descname"><span class="pre">UserConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/apps.html#UserConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.apps.UserConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.apps.UserConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#AuthUser.apps.UserConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.apps.UserConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'AuthUser'</span></em><a class="headerlink" href="#AuthUser.apps.UserConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser.forms">
+<span id="authuser-forms-module"></span><h2>AuthUser.forms module<a class="headerlink" href="#module-AuthUser.forms" title="Link to this heading"></a></h2>
+<p>Forms for the AuthUser app.</p>
+<p>Includes customizations for the Django authentication form.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.forms.CustomLoginForm">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.forms.</span></span><span class="sig-name descname"><span class="pre">CustomLoginForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/forms.html#CustomLoginForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.forms.CustomLoginForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticationForm</span></code></p>
+<p>Custom login form that applies Tailwind CSS classes for styling.</p>
+<p>Inherits from Django’s built-in <cite>AuthenticationForm</cite> and overrides the
+default widget attributes for the username and password fields.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.forms.CustomLoginForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#AuthUser.forms.CustomLoginForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.forms.CustomLoginForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#AuthUser.forms.CustomLoginForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="AuthUser.forms.CustomLoginForm.media">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#AuthUser.forms.CustomLoginForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser.models">
+<span id="authuser-models-module"></span><h2>AuthUser.models module<a class="headerlink" href="#module-AuthUser.models" title="Link to this heading"></a></h2>
+<p>Models for the AuthUser app.</p>
+<p>Includes custom user models for Engineers and Clients who are associated with entities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.models.Client">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.models.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/models.html#Client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.models.Client" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AuthUser.models.EnterpriseUser" title="AuthUser.models.EnterpriseUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnterpriseUser</span></code></a></p>
+<p>Model representing a client user.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#AuthUser.models.Client.first_name" title="Link to this definition"></a></dt>
+<dd><p>Client’s first name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#AuthUser.models.Client.last_name" title="Link to this definition"></a></dt>
+<dd><p>Client’s last name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="AuthUser.models.Client.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#AuthUser.models.Client.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="AuthUser.models.Client.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#AuthUser.models.Client.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.entity">
+<span class="sig-name descname"><span class="pre">entity</span></span><a class="headerlink" href="#AuthUser.models.Client.entity" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.entity_id">
+<span class="sig-name descname"><span class="pre">entity_id</span></span><a class="headerlink" href="#AuthUser.models.Client.entity_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.models.Client.get_role_display">
+<span class="sig-name descname"><span class="pre">get_role_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">role&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AuthUser.models.Client.get_role_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#AuthUser.models.Client.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#AuthUser.models.Client.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.order_set">
+<span class="sig-name descname"><span class="pre">order_set</span></span><a class="headerlink" href="#AuthUser.models.Client.order_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Client.role">
+<span class="sig-name descname"><span class="pre">role</span></span><a class="headerlink" href="#AuthUser.models.Client.role" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.models.</span></span><span class="sig-name descname"><span class="pre">Engineer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/models.html#Engineer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.models.Engineer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#AuthUser.models.EnterpriseUser" title="AuthUser.models.EnterpriseUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">EnterpriseUser</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractUser</span></code></p>
+<p>Model representing an engineer, extending the base Django user and EnterpriseUser.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.signature">
+<span class="sig-name descname"><span class="pre">signature</span></span><a class="headerlink" href="#AuthUser.models.Engineer.signature" title="Link to this definition"></a></dt>
+<dd><p>The engineer’s signature (used in reports).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.groups">
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#AuthUser.models.Engineer.groups" title="Link to this definition"></a></dt>
+<dd><p>Groups the engineer belongs to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ManyToMany</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.user_permissions">
+<span class="sig-name descname"><span class="pre">user_permissions</span></span><a class="headerlink" href="#AuthUser.models.Engineer.user_permissions" title="Link to this definition"></a></dt>
+<dd><p>Permissions specific to the engineer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ManyToMany</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#AuthUser.models.Engineer.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#AuthUser.models.Engineer.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.date_joined">
+<span class="sig-name descname"><span class="pre">date_joined</span></span><a class="headerlink" href="#AuthUser.models.Engineer.date_joined" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#AuthUser.models.Engineer.email" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.entity">
+<span class="sig-name descname"><span class="pre">entity</span></span><a class="headerlink" href="#AuthUser.models.Engineer.entity" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.entity_id">
+<span class="sig-name descname"><span class="pre">entity_id</span></span><a class="headerlink" href="#AuthUser.models.Engineer.entity_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.first_name">
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#AuthUser.models.Engineer.first_name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.get_next_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_next_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AuthUser.models.Engineer.get_next_by_date_joined" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.get_previous_by_date_joined">
+<span class="sig-name descname"><span class="pre">get_previous_by_date_joined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">date_joined&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AuthUser.models.Engineer.get_previous_by_date_joined" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.get_role_display">
+<span class="sig-name descname"><span class="pre">get_role_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">role&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AuthUser.models.Engineer.get_role_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#AuthUser.models.Engineer.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#AuthUser.models.Engineer.is_active" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.is_staff">
+<span class="sig-name descname"><span class="pre">is_staff</span></span><a class="headerlink" href="#AuthUser.models.Engineer.is_staff" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.is_superuser">
+<span class="sig-name descname"><span class="pre">is_superuser</span></span><a class="headerlink" href="#AuthUser.models.Engineer.is_superuser" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.last_login">
+<span class="sig-name descname"><span class="pre">last_login</span></span><a class="headerlink" href="#AuthUser.models.Engineer.last_login" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.last_name">
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#AuthUser.models.Engineer.last_name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.order_set">
+<span class="sig-name descname"><span class="pre">order_set</span></span><a class="headerlink" href="#AuthUser.models.Engineer.order_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.password">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="headerlink" href="#AuthUser.models.Engineer.password" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.role">
+<span class="sig-name descname"><span class="pre">role</span></span><a class="headerlink" href="#AuthUser.models.Engineer.role" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">signature</span></span><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">user_permissions</span></span><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.Engineer.username">
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#AuthUser.models.Engineer.username" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.models.</span></span><span class="sig-name descname"><span class="pre">EnterpriseUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/models.html#EnterpriseUser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.models.EnterpriseUser" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Abstract base model for users belonging to an entity (company or institution).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.entity">
+<span class="sig-name descname"><span class="pre">entity</span></span><a class="headerlink" href="#AuthUser.models.EnterpriseUser.entity" title="Link to this definition"></a></dt>
+<dd><p>The entity (organization) the user is associated with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Entity.html#Entity.models.Entity" title="Entity.models.Entity">Entity</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.role">
+<span class="sig-name descname"><span class="pre">role</span></span><a class="headerlink" href="#AuthUser.models.EnterpriseUser.role" title="Link to this definition"></a></dt>
+<dd><p>The user’s role within the entity, chosen from predefined choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/AuthUser/models.html#EnterpriseUser.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.models.EnterpriseUser.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.Meta.abstract">
+<span class="sig-name descname"><span class="pre">abstract</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#AuthUser.models.EnterpriseUser.Meta.abstract" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.ROLE_CHOICES">
+<span class="sig-name descname"><span class="pre">ROLE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('MAN',</span> <span class="pre">'Gerente'),</span> <span class="pre">('ENG',</span> <span class="pre">'Ingeniero/a'),</span> <span class="pre">('REP',</span> <span class="pre">'Representante</span> <span class="pre">de</span> <span class="pre">ventas'),</span> <span class="pre">('ADM',</span> <span class="pre">'Administrativo'),</span> <span class="pre">('BOS',</span> <span class="pre">'Jefe/a</span> <span class="pre">de</span> <span class="pre">unidad'),</span> <span class="pre">('SUP',</span> <span class="pre">'Supervisor/a'),</span> <span class="pre">('DOC',</span> <span class="pre">'Doctor/a'),</span> <span class="pre">('NUR',</span> <span class="pre">'Enfermero/a'),</span> <span class="pre">('TEN',</span> <span class="pre">'Tens')]</span></em><a class="headerlink" href="#AuthUser.models.EnterpriseUser.ROLE_CHOICES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">entity</span></span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.entity_id">
+<span class="sig-name descname"><span class="pre">entity_id</span></span><a class="headerlink" href="#AuthUser.models.EnterpriseUser.entity_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.models.EnterpriseUser.get_role_display">
+<span class="sig-name descname"><span class="pre">get_role_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">role&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AuthUser.models.EnterpriseUser.get_role_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">role</span></span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser.serializers">
+<span id="authuser-serializers-module"></span><h2>AuthUser.serializers module<a class="headerlink" href="#module-AuthUser.serializers" title="Link to this heading"></a></h2>
+<p>Serializers for the AuthUser app.</p>
+<p>Includes serializers for the Engineer model.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.serializers.EngineerSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.serializers.</span></span><span class="sig-name descname"><span class="pre">EngineerSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/serializers.html#EngineerSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.serializers.EngineerSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>Serializer for the Engineer model.</p>
+<p>This serializer converts Engineer model instances into JSON format and vice versa.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><p>id (int): The unique identifier for the engineer.
+first_name (str): The first name of the engineer.
+last_name (str): The last name of the engineer.
+email (str): The email address of the engineer.
+role (str): The role of the engineer within the entity.
+signature (str): The engineer’s signature (used in reports).</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.serializers.EngineerSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/AuthUser/serializers.html#EngineerSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.serializers.EngineerSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.serializers.EngineerSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email',</span> <span class="pre">'role',</span> <span class="pre">'signature']</span></em><a class="headerlink" href="#AuthUser.serializers.EngineerSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.serializers.EngineerSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#AuthUser.serializers.EngineerSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#AuthUser.models.Engineer" title="AuthUser.models.Engineer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Engineer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser.tests">
+<span id="authuser-tests-module"></span><h2>AuthUser.tests module<a class="headerlink" href="#module-AuthUser.tests" title="Link to this heading"></a></h2>
+<p>Test cases for the AuthUser app models.</p>
+<p>Includes tests for the Engineer and Client models, ensuring proper creation,
+relationships, and functionality of their fields.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.tests.ClientModelTestCase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.tests.</span></span><span class="sig-name descname"><span class="pre">ClientModelTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#ClientModelTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.ClientModelTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the Client model.</p>
+<p>This test case covers the creation and validation of a Client instance,
+ensuring that the client’s fields, such as role and entity relationship,
+are correctly set.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.tests.ClientModelTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#ClientModelTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.ClientModelTestCase.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the necessary data for the tests.</p>
+<p>Creates an entity and a client instance for use in the test cases.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.tests.ClientModelTestCase.test_client_creation">
+<span class="sig-name descname"><span class="pre">test_client_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#ClientModelTestCase.test_client_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.ClientModelTestCase.test_client_creation" title="Link to this definition"></a></dt>
+<dd><p>Test the creation of a client.</p>
+<p>Verifies that the client instance has been created with the correct
+role and entity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.tests.EngineerModelTestCase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.tests.</span></span><span class="sig-name descname"><span class="pre">EngineerModelTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#EngineerModelTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.EngineerModelTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the Engineer model.</p>
+<p>This test case covers the creation and validation of an Engineer instance,
+including its relationships and attributes such as username, role, signature,
+and the entity it belongs to.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.tests.EngineerModelTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#EngineerModelTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.EngineerModelTestCase.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the necessary data for the tests.</p>
+<p>Creates an entity and an engineer instance for use in the test cases.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.tests.EngineerModelTestCase.test_engineer_creation">
+<span class="sig-name descname"><span class="pre">test_engineer_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#EngineerModelTestCase.test_engineer_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.EngineerModelTestCase.test_engineer_creation" title="Link to this definition"></a></dt>
+<dd><p>Test the creation of an engineer.</p>
+<p>Verifies that the engineer instance has been created correctly with the
+expected attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.tests.EngineerModelTestCase.test_engineer_groups">
+<span class="sig-name descname"><span class="pre">test_engineer_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/tests.html#EngineerModelTestCase.test_engineer_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.tests.EngineerModelTestCase.test_engineer_groups" title="Link to this definition"></a></dt>
+<dd><p>Test adding groups to an engineer.</p>
+<p>Verifies that the engineer can have multiple groups and that groups can
+be correctly added to the engineer’s group set.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser.urls">
+<span id="authuser-urls-module"></span><h2>AuthUser.urls module<a class="headerlink" href="#module-AuthUser.urls" title="Link to this heading"></a></h2>
+<p>URL routing for the AuthUser app.</p>
+<p>Defines the API endpoints related to the Engineer model, registering the
+EngineerViewSet with the DefaultRouter and including the generated URLs.</p>
+</section>
+<section id="module-AuthUser.views">
+<span id="authuser-views-module"></span><h2>AuthUser.views module<a class="headerlink" href="#module-AuthUser.views" title="Link to this heading"></a></h2>
+<p>Views for the AuthUser app.</p>
+<p>Defines a viewset for managing Engineer instances via the Django REST framework.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AuthUser.views.</span></span><span class="sig-name descname"><span class="pre">EngineerViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/views.html#EngineerViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.views.EngineerViewSet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelViewSet</span></code></p>
+<p>ViewSet for handling Engineer model operations.</p>
+<p>This ViewSet provides <cite>list</cite>, <cite>create</cite>, <cite>retrieve</cite>, <cite>update</cite>, and <cite>destroy</cite> actions
+for the Engineer model. It uses a partial update by default to simplify PATCH support.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.basename" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.detail" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.queryset">
+<span class="sig-name descname"><span class="pre">queryset</span></span><a class="headerlink" href="#AuthUser.views.EngineerViewSet.queryset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#AuthUser.views.EngineerViewSet.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#AuthUser.serializers.EngineerSerializer" title="AuthUser.serializers.EngineerSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">EngineerSerializer</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#AuthUser.views.EngineerViewSet.suffix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AuthUser.views.EngineerViewSet.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AuthUser/views.html#EngineerViewSet.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AuthUser.views.EngineerViewSet.update" title="Link to this definition"></a></dt>
+<dd><p>Override the default update behavior to allow partial updates by default.</p>
+<p>This means clients don’t need to specify all required fields in a PUT request.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-AuthUser">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-AuthUser" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="App.html" class="btn btn-neutral float-left" title="App package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AuthUser.migrations.html" class="btn btn-neutral float-right" title="AuthUser.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

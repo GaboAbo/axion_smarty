@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device.models &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">axion_smarty-main</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Device.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Device.models</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Entity.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Entity</span><span class="p">,</span> <span class="n">Contract</span>
+
+
+<div class="viewcode-block" id="DeviceModel">
+<a class="viewcode-back" href="../../Device.html#Device.models.DeviceModel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DeviceModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stores generic information about a device model.</span>
+
+<span class="sd">    Fields:</span>
+<span class="sd">        device_type: Category of the device (e.g., processor, endoscope).</span>
+<span class="sd">        device_gen: Device generation or product series.</span>
+<span class="sd">        part_number: Manufacturer part number or model identifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">TYPE_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;END&quot;</span><span class="p">,</span> <span class="s2">&quot;Endoscopio flexible&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;VPR&quot;</span><span class="p">,</span> <span class="s2">&quot;Procesador de video&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;LIS&quot;</span><span class="p">,</span> <span class="s2">&quot;Fuente de luz&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;PMP&quot;</span><span class="p">,</span> <span class="s2">&quot;Bomba de irrigación&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;INF&quot;</span><span class="p">,</span> <span class="s2">&quot;Insuflador de CO²&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;MON&quot;</span><span class="p">,</span> <span class="s2">&quot;Monitor de grado médico&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;WST&quot;</span><span class="p">,</span> <span class="s2">&quot;Estación de trabajo&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;TEL&quot;</span><span class="p">,</span> <span class="s2">&quot;Telescopio&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;ECG&quot;</span><span class="p">,</span> <span class="s2">&quot;Unidad de electrocirugía&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;UDI&quot;</span><span class="p">,</span> <span class="s2">&quot;Sistema de documentación&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">GENERATION_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;OPT&quot;</span><span class="p">,</span> <span class="s2">&quot;Optera (170)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;EX3&quot;</span><span class="p">,</span> <span class="s2">&quot;Exera III (190)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;EX2&quot;</span><span class="p">,</span> <span class="s2">&quot;Exera II (180)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;EX1&quot;</span><span class="p">,</span> <span class="s2">&quot;Exera I (160)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;LUC&quot;</span><span class="p">,</span> <span class="s2">&quot;Evis Lucera (270)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;LUE&quot;</span><span class="p">,</span> <span class="s2">&quot;Evis Lucera Elite (290)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;EV3&quot;</span><span class="p">,</span> <span class="s2">&quot;Evis Exera III (190)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;EV2&quot;</span><span class="p">,</span> <span class="s2">&quot;Evis Exera II (180)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;VSR&quot;</span><span class="p">,</span> <span class="s2">&quot;Visera (150/160)&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;VSP&quot;</span><span class="p">,</span> <span class="s2">&quot;Visera Pro&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;VSE&quot;</span><span class="p">,</span> <span class="s2">&quot;Visera Elite&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;VS2&quot;</span><span class="p">,</span> <span class="s2">&quot;Visera Elite II&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;X1P&quot;</span><span class="p">,</span> <span class="s2">&quot;X1 Series&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;OIP&quot;</span><span class="p">,</span> <span class="s2">&quot;Procesador de imágenes&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;CV1&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie CV-100&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;CV2&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie CV-200&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;CV3&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie CV-300&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;CV4&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie CV-400&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;OES&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie OES&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;PRO&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie PRO&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;ULT&quot;</span><span class="p">,</span> <span class="s2">&quot;Serie ULTRA&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;FIB&quot;</span><span class="p">,</span> <span class="s2">&quot;Fibroscopio de fibra óptica&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;NOG&quot;</span><span class="p">,</span> <span class="s2">&quot;Sin generacion&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">device_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="s2">&quot;Tipo&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE_CHOICES</span><span class="p">)</span>
+    <span class="n">device_gen</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="s2">&quot;Generacion&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">GENERATION_CHOICES</span><span class="p">)</span>
+    <span class="n">part_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="s2">&quot;Modelo&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="s2">&quot;Modelo&quot;</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s2">&quot;Modelos&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_number</span></div>
+
+
+
+<div class="viewcode-block" id="Device">
+<a class="viewcode-back" href="../../Device.html#Device.models.Device">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Device</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stores a specific device instance tied to a client and contract.</span>
+
+<span class="sd">    Fields:</span>
+<span class="sd">        client: Entity that owns the device.</span>
+<span class="sd">        contract: Related contract if applicable.</span>
+<span class="sd">        device_model: Link to the device&#39;s generic model info.</span>
+<span class="sd">        serial_number: Unique serial number for identification.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="n">Entity</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Entidad&quot;</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span>
+        <span class="n">null</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">contract</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="n">Contract</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Contrato&quot;</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span>
+        <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">blank</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">device_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="n">DeviceModel</span><span class="p">,</span>
+        <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Equipo&quot;</span><span class="p">,</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span>
+        <span class="n">null</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">serial_number</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="s2">&quot;Serie&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="s2">&quot;Equipo&quot;</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s2">&quot;Equipos&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device_model</span><span class="o">.</span><span class="n">part_number</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

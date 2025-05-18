@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device package &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Device.migrations package" href="Device.migrations.html" />
+    <link rel="prev" title="AuthUser.migrations package" href="AuthUser.migrations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">axion_smarty-main</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="App.html">App package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.html">AuthUser package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Device package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html">Device.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.admin">Device.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.apps">Device.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Device.apps.DeviceConfig"><code class="docutils literal notranslate"><span class="pre">DeviceConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.forms">Device.forms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.models">Device.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Device.models.Device"><code class="docutils literal notranslate"><span class="pre">Device</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Device.models.DeviceModel"><code class="docutils literal notranslate"><span class="pre">DeviceModel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.serializers">Device.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Device.serializers.DeviceModelSerializer"><code class="docutils literal notranslate"><span class="pre">DeviceModelSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Device.serializers.DeviceSerializer"><code class="docutils literal notranslate"><span class="pre">DeviceSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.tests">Device.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Device.tests.DeviceModelTestCase"><code class="docutils literal notranslate"><span class="pre">DeviceModelTestCase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Device.tests.DeviceTestCase"><code class="docutils literal notranslate"><span class="pre">DeviceTestCase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.urls">Device.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device.views">Device.views module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Device">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Entity.html">Entity package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MicrosoftAuth.html">MicrosoftAuth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Order.html">Order package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">axion_smarty-main</a></li>
+      <li class="breadcrumb-item active">Device package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Device.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-package">
+<h1>Device package<a class="headerlink" href="#device-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Device.migrations.html">Device.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Device.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Device.migrations.html#module-Device.migrations.0001_initial">Device.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Device.migrations.html#Device.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html#Device.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html#Device.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html#Device.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Device.migrations.html#module-Device.migrations.0002_alter_devicemodel_device_gen">Device.migrations.0002_alter_devicemodel_device_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Device.migrations.html#Device.migrations.0002_alter_devicemodel_device_gen.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html#Device.migrations.0002_alter_devicemodel_device_gen.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Device.migrations.html#Device.migrations.0002_alter_devicemodel_device_gen.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Device.migrations.html#module-Device.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Device.admin">
+<span id="device-admin-module"></span><h2>Device.admin module<a class="headerlink" href="#module-Device.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Device.apps">
+<span id="device-apps-module"></span><h2>Device.apps module<a class="headerlink" href="#module-Device.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.apps.DeviceConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.apps.</span></span><span class="sig-name descname"><span class="pre">DeviceConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/apps.html#DeviceConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.apps.DeviceConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.apps.DeviceConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#Device.apps.DeviceConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.apps.DeviceConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Device'</span></em><a class="headerlink" href="#Device.apps.DeviceConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Device.forms">
+<span id="device-forms-module"></span><h2>Device.forms module<a class="headerlink" href="#module-Device.forms" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Device.models">
+<span id="device-models-module"></span><h2>Device.models module<a class="headerlink" href="#module-Device.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.models.Device">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.models.</span></span><span class="sig-name descname"><span class="pre">Device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/models.html#Device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.models.Device" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Stores a specific device instance tied to a client and contract.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><p>client: Entity that owns the device.
+contract: Related contract if applicable.
+device_model: Link to the device’s generic model info.
+serial_number: Unique serial number for identification.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Device.models.Device.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Device.models.Device.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Device.models.Device.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Device.models.Device.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.client">
+<span class="sig-name descname"><span class="pre">client</span></span><a class="headerlink" href="#Device.models.Device.client" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.client_id">
+<span class="sig-name descname"><span class="pre">client_id</span></span><a class="headerlink" href="#Device.models.Device.client_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.contract">
+<span class="sig-name descname"><span class="pre">contract</span></span><a class="headerlink" href="#Device.models.Device.contract" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.contract_id">
+<span class="sig-name descname"><span class="pre">contract_id</span></span><a class="headerlink" href="#Device.models.Device.contract_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.device_model">
+<span class="sig-name descname"><span class="pre">device_model</span></span><a class="headerlink" href="#Device.models.Device.device_model" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.device_model_id">
+<span class="sig-name descname"><span class="pre">device_model_id</span></span><a class="headerlink" href="#Device.models.Device.device_model_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Device.models.Device.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.included_devices">
+<span class="sig-name descname"><span class="pre">included_devices</span></span><a class="headerlink" href="#Device.models.Device.included_devices" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.maintenanceprotocol_set">
+<span class="sig-name descname"><span class="pre">maintenanceprotocol_set</span></span><a class="headerlink" href="#Device.models.Device.maintenanceprotocol_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Device.models.Device.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.Device.serial_number">
+<span class="sig-name descname"><span class="pre">serial_number</span></span><a class="headerlink" href="#Device.models.Device.serial_number" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.models.DeviceModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.models.</span></span><span class="sig-name descname"><span class="pre">DeviceModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/models.html#DeviceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.models.DeviceModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Stores generic information about a device model.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><p>device_type: Category of the device (e.g., processor, endoscope).
+device_gen: Device generation or product series.
+part_number: Manufacturer part number or model identifier.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Device.models.DeviceModel.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.GENERATION_CHOICES">
+<span class="sig-name descname"><span class="pre">GENERATION_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('OPT',</span> <span class="pre">'Optera</span> <span class="pre">(170)'),</span> <span class="pre">('EX3',</span> <span class="pre">'Exera</span> <span class="pre">III</span> <span class="pre">(190)'),</span> <span class="pre">('EX2',</span> <span class="pre">'Exera</span> <span class="pre">II</span> <span class="pre">(180)'),</span> <span class="pre">('EX1',</span> <span class="pre">'Exera</span> <span class="pre">I</span> <span class="pre">(160)'),</span> <span class="pre">('LUC',</span> <span class="pre">'Evis</span> <span class="pre">Lucera</span> <span class="pre">(270)'),</span> <span class="pre">('LUE',</span> <span class="pre">'Evis</span> <span class="pre">Lucera</span> <span class="pre">Elite</span> <span class="pre">(290)'),</span> <span class="pre">('EV3',</span> <span class="pre">'Evis</span> <span class="pre">Exera</span> <span class="pre">III</span> <span class="pre">(190)'),</span> <span class="pre">('EV2',</span> <span class="pre">'Evis</span> <span class="pre">Exera</span> <span class="pre">II</span> <span class="pre">(180)'),</span> <span class="pre">('VSR',</span> <span class="pre">'Visera</span> <span class="pre">(150/160)'),</span> <span class="pre">('VSP',</span> <span class="pre">'Visera</span> <span class="pre">Pro'),</span> <span class="pre">('VSE',</span> <span class="pre">'Visera</span> <span class="pre">Elite'),</span> <span class="pre">('VS2',</span> <span class="pre">'Visera</span> <span class="pre">Elite</span> <span class="pre">II'),</span> <span class="pre">('X1P',</span> <span class="pre">'X1</span> <span class="pre">Series'),</span> <span class="pre">('OIP',</span> <span class="pre">'Procesador</span> <span class="pre">de</span> <span class="pre">imágenes'),</span> <span class="pre">('CV1',</span> <span class="pre">'Serie</span> <span class="pre">CV-100'),</span> <span class="pre">('CV2',</span> <span class="pre">'Serie</span> <span class="pre">CV-200'),</span> <span class="pre">('CV3',</span> <span class="pre">'Serie</span> <span class="pre">CV-300'),</span> <span class="pre">('CV4',</span> <span class="pre">'Serie</span> <span class="pre">CV-400'),</span> <span class="pre">('OES',</span> <span class="pre">'Serie</span> <span class="pre">OES'),</span> <span class="pre">('PRO',</span> <span class="pre">'Serie</span> <span class="pre">PRO'),</span> <span class="pre">('ULT',</span> <span class="pre">'Serie</span> <span class="pre">ULTRA'),</span> <span class="pre">('FIB',</span> <span class="pre">'Fibroscopio</span> <span class="pre">de</span> <span class="pre">fibra</span> <span class="pre">óptica'),</span> <span class="pre">('NOG',</span> <span class="pre">'Sin</span> <span class="pre">generacion')]</span></em><a class="headerlink" href="#Device.models.DeviceModel.GENERATION_CHOICES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Device.models.DeviceModel.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.TYPE_CHOICES">
+<span class="sig-name descname"><span class="pre">TYPE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('END',</span> <span class="pre">'Endoscopio</span> <span class="pre">flexible'),</span> <span class="pre">('VPR',</span> <span class="pre">'Procesador</span> <span class="pre">de</span> <span class="pre">video'),</span> <span class="pre">('LIS',</span> <span class="pre">'Fuente</span> <span class="pre">de</span> <span class="pre">luz'),</span> <span class="pre">('PMP',</span> <span class="pre">'Bomba</span> <span class="pre">de</span> <span class="pre">irrigación'),</span> <span class="pre">('INF',</span> <span class="pre">'Insuflador</span> <span class="pre">de</span> <span class="pre">CO²'),</span> <span class="pre">('MON',</span> <span class="pre">'Monitor</span> <span class="pre">de</span> <span class="pre">grado</span> <span class="pre">médico'),</span> <span class="pre">('WST',</span> <span class="pre">'Estación</span> <span class="pre">de</span> <span class="pre">trabajo'),</span> <span class="pre">('TEL',</span> <span class="pre">'Telescopio'),</span> <span class="pre">('ECG',</span> <span class="pre">'Unidad</span> <span class="pre">de</span> <span class="pre">electrocirugía'),</span> <span class="pre">('UDI',</span> <span class="pre">'Sistema</span> <span class="pre">de</span> <span class="pre">documentación')]</span></em><a class="headerlink" href="#Device.models.DeviceModel.TYPE_CHOICES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.device_gen">
+<span class="sig-name descname"><span class="pre">device_gen</span></span><a class="headerlink" href="#Device.models.DeviceModel.device_gen" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.device_type">
+<span class="sig-name descname"><span class="pre">device_type</span></span><a class="headerlink" href="#Device.models.DeviceModel.device_type" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.get_device_gen_display">
+<span class="sig-name descname"><span class="pre">get_device_gen_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">device_gen&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Device.models.DeviceModel.get_device_gen_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.get_device_type_display">
+<span class="sig-name descname"><span class="pre">get_device_type_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">device_type&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Device.models.DeviceModel.get_device_type_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Device.models.DeviceModel.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Device.models.DeviceModel.model" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Device.models.DeviceModel.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.models.DeviceModel.part_number">
+<span class="sig-name descname"><span class="pre">part_number</span></span><a class="headerlink" href="#Device.models.DeviceModel.part_number" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Device.serializers">
+<span id="device-serializers-module"></span><h2>Device.serializers module<a class="headerlink" href="#module-Device.serializers" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.serializers.DeviceModelSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.serializers.</span></span><span class="sig-name descname"><span class="pre">DeviceModelSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/serializers.html#DeviceModelSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.serializers.DeviceModelSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="App.html#App.serializers.ParentSerializer" title="App.serializers.ParentSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParentSerializer</span></code></a></p>
+<p>Serializer for the DeviceModel model.
+Only includes minimal fields (ID and part number).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.serializers.DeviceModelSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Device/serializers.html#DeviceModelSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.serializers.DeviceModelSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.serializers.DeviceModelSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'part_number']</span></em><a class="headerlink" href="#Device.serializers.DeviceModelSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.serializers.DeviceModelSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Device.serializers.DeviceModelSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Device.models.DeviceModel" title="Device.models.DeviceModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceModel</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.serializers.DeviceSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.serializers.</span></span><span class="sig-name descname"><span class="pre">DeviceSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/serializers.html#DeviceSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.serializers.DeviceSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>Read-only serializer for Device model.
+Includes human-readable client and device model names.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.serializers.DeviceSerializer.Meta">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/Device/serializers.html#DeviceSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.serializers.DeviceSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.serializers.DeviceSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'client_name',</span> <span class="pre">'device_model_name',</span> <span class="pre">'serial_number']</span></em><a class="headerlink" href="#Device.serializers.DeviceSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Device.serializers.DeviceSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#Device.serializers.DeviceSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#Device.models.Device" title="Device.models.Device"><code class="xref py py-class docutils literal notranslate"><span class="pre">Device</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Device.tests">
+<span id="device-tests-module"></span><h2>Device.tests module<a class="headerlink" href="#module-Device.tests" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.tests.DeviceModelTestCase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.tests.</span></span><span class="sig-name descname"><span class="pre">DeviceModelTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/tests.html#DeviceModelTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.tests.DeviceModelTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Device.tests.DeviceModelTestCase.test_device_model_creation">
+<span class="sig-name descname"><span class="pre">test_device_model_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/tests.html#DeviceModelTestCase.test_device_model_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.tests.DeviceModelTestCase.test_device_model_creation" title="Link to this definition"></a></dt>
+<dd><p>Test creation of a DeviceModel instance and its string representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Device.tests.DeviceTestCase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Device.tests.</span></span><span class="sig-name descname"><span class="pre">DeviceTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/tests.html#DeviceTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.tests.DeviceTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Device.tests.DeviceTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/tests.html#DeviceTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.tests.DeviceTestCase.setUp" title="Link to this definition"></a></dt>
+<dd><p>Create common Entity, Contract, and DeviceModel for device creation test.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Device.tests.DeviceTestCase.test_device_creation">
+<span class="sig-name descname"><span class="pre">test_device_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Device/tests.html#DeviceTestCase.test_device_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Device.tests.DeviceTestCase.test_device_creation" title="Link to this definition"></a></dt>
+<dd><p>Test creation of a Device and its relationships and string output.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Device.urls">
+<span id="device-urls-module"></span><h2>Device.urls module<a class="headerlink" href="#module-Device.urls" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Device.views">
+<span id="device-views-module"></span><h2>Device.views module<a class="headerlink" href="#module-Device.views" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Device">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Device" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="AuthUser.migrations.html" class="btn btn-neutral float-left" title="AuthUser.migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Device.migrations.html" class="btn btn-neutral float-right" title="Device.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

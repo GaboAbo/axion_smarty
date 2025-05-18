@@ -4,9 +4,16 @@ from datetime import timedelta
 
 from .models import Entity, Contract, Area
 
-# Create your tests here.
+
 class EntityModelTest(TestCase):
+    """
+    Test case for the Entity model.
+    """
+
     def test_entity_creation(self):
+        """
+        Test that an Entity instance is created correctly and string representation matches its name.
+        """
         entity = Entity.objects.create(
             name="Hospital San Juan",
             address="123 Calle Central"
@@ -17,7 +24,15 @@ class EntityModelTest(TestCase):
 
 
 class ContractModelTest(TestCase):
+    """
+    Test case for the Contract model.
+    """
+
     def test_contract_creation(self):
+        """
+        Test that a Contract instance is created with valid data,
+        is linked to an Entity, and its string representation is correct.
+        """
         entity = Entity.objects.create(
             name="Hospital Central",
             address="Av. Principal 456"
@@ -40,7 +55,15 @@ class ContractModelTest(TestCase):
 
 
 class AreaModelTest(TestCase):
+    """
+    Test case for the Area model.
+    """
+
     def test_area_creation(self):
+        """
+        Test that an Area instance is correctly created and linked to an Entity,
+        and the string representation matches its name.
+        """
         entity = Entity.objects.create(
             name="Clinica Norte",
             address="Calle 9, Zona 3"

@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App package &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AuthUser package" href="AuthUser.html" />
+    <link rel="prev" title="axion_smarty-main" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">axion_smarty-main</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">App package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.admin">App.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.apps">App.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#App.apps.AppConfig"><code class="docutils literal notranslate"><span class="pre">AppConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.constants">App.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.models">App.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.serializers">App.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#App.serializers.ParentSerializer"><code class="docutils literal notranslate"><span class="pre">ParentSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.signals">App.signals module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#App.signals.create_protocols_for_order"><code class="docutils literal notranslate"><span class="pre">create_protocols_for_order()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App.tests">App.tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-urls-module">App.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app-views-module">App.views module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-App">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AuthUser.html">AuthUser package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Device.html">Device package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entity.html">Entity package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Main.html">Main package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MicrosoftAuth.html">MicrosoftAuth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Order.html">Order package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">axion_smarty-main</a></li>
+      <li class="breadcrumb-item active">App package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/App.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="app-package">
+<h1>App package<a class="headerlink" href="#app-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-App.admin">
+<span id="app-admin-module"></span><h2>App.admin module<a class="headerlink" href="#module-App.admin" title="Link to this heading"></a></h2>
+<p>Admin configuration for registering models to the Django admin interface.</p>
+<p>This module registers all the key models used in the application so that they
+can be managed through the Django admin panel.</p>
+</section>
+<section id="module-App.apps">
+<span id="app-apps-module"></span><h2>App.apps module<a class="headerlink" href="#module-App.apps" title="Link to this heading"></a></h2>
+<p>App configuration for the ‘App’ Django application.</p>
+<p>This module sets up the application configuration and ensures that signals are imported
+when the app is ready.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="App.apps.AppConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">App.apps.</span></span><span class="sig-name descname"><span class="pre">AppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/App/apps.html#AppConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#App.apps.AppConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<p>Configuration class for the ‘App’ application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="App.apps.AppConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><a class="headerlink" href="#App.apps.AppConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd><p>The default field type for auto-generated primary keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="App.apps.AppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#App.apps.AppConfig.name" title="Link to this definition"></a></dt>
+<dd><p>The full Python path to the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'App'</span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="App.apps.AppConfig.ready">
+<span class="sig-name descname"><span class="pre">ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/App/apps.html#AppConfig.ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#App.apps.AppConfig.ready" title="Link to this definition"></a></dt>
+<dd><p>Hook for application initialization.</p>
+<p>This method is called when the application is fully loaded. It imports
+the <cite>signals</cite> module to register model signals.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-App.constants">
+<span id="app-constants-module"></span><h2>App.constants module<a class="headerlink" href="#module-App.constants" title="Link to this heading"></a></h2>
+</section>
+<section id="module-App.models">
+<span id="app-models-module"></span><h2>App.models module<a class="headerlink" href="#module-App.models" title="Link to this heading"></a></h2>
+</section>
+<section id="module-App.serializers">
+<span id="app-serializers-module"></span><h2>App.serializers module<a class="headerlink" href="#module-App.serializers" title="Link to this heading"></a></h2>
+<p>Custom serializer base class for selective field serialization.</p>
+<p>This module defines a base serializer that allows dynamically including only
+specified fields via the serializer’s context.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="App.serializers.ParentSerializer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">App.serializers.</span></span><span class="sig-name descname"><span class="pre">ParentSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/App/serializers.html#ParentSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#App.serializers.ParentSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<p>A base serializer that allows dynamic inclusion of fields.</p>
+<p>This class enables child serializers to specify which fields to include
+by passing a <cite>fields</cite> list in the serializer context.</p>
+<dl class="simple">
+<dt>Behavior:</dt><dd><ul class="simple">
+<li><p>If <cite>fields</cite> are passed in the context, only those fields will be retained.</p></li>
+<li><p>If no <cite>fields</cite> are passed, all fields defined in the Meta class will be included.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">serializer</span> <span class="pre">=</span> <span class="pre">MyChildSerializer(instance,</span> <span class="pre">context={'fields':</span> <span class="pre">['id',</span> <span class="pre">'name']})</span>
+<span class="pre">`</span></code></p>
+<p>This approach is useful when building flexible APIs or reusable serializers.</p>
+</dd></dl>
+
+</section>
+<section id="module-App.signals">
+<span id="app-signals-module"></span><h2>App.signals module<a class="headerlink" href="#module-App.signals" title="Link to this heading"></a></h2>
+<p>Signal handlers for the ‘App’ Django application.</p>
+<p>This module handles model signals related to many-to-many relationships in Orders.
+Specifically, it listens for when devices are added to an Order and creates the corresponding
+MaintenanceProtocol entries based on the device model’s specifications.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="App.signals.create_protocols_for_order">
+<span class="sig-prename descclassname"><span class="pre">App.signals.</span></span><span class="sig-name descname"><span class="pre">create_protocols_for_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk_set</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/App/signals.html#create_protocols_for_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#App.signals.create_protocols_for_order" title="Link to this definition"></a></dt>
+<dd><p>Signal handler that creates MaintenanceProtocol entries when devices are added to an Order.</p>
+<p>Triggered after devices are added to the many-to-many <cite>device</cite> field of an <cite>Order</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sender</strong> (<em>Model</em>) – The intermediate model for the many-to-many relationship.</p></li>
+<li><p><strong>instance</strong> (<a class="reference internal" href="Order.html#Order.models.Order" title="Order.models.Order"><em>Order</em></a>) – The Order instance to which devices are being added.</p></li>
+<li><p><strong>action</strong> (<em>str</em>) – The type of change. We only respond to ‘post_add’.</p></li>
+<li><p><strong>pk_set</strong> (<em>set</em>) – Primary keys of the devices that were added.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments provided by the signal system.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Behavior:</dt><dd><ul class="simple">
+<li><p>For each newly added device, dynamically imports the corresponding device model class.</p></li>
+<li><p>Retrieves the device-specific <cite>fields</cite> definition.</p></li>
+<li><p>Ensures a <cite>MaintenanceProtocol</cite> is created or fetched for the order/device combination.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-App.tests">
+<span id="app-tests-module"></span><h2>App.tests module<a class="headerlink" href="#module-App.tests" title="Link to this heading"></a></h2>
+</section>
+<section id="app-urls-module">
+<h2>App.urls module<a class="headerlink" href="#app-urls-module" title="Link to this heading"></a></h2>
+</section>
+<section id="app-views-module">
+<h2>App.views module<a class="headerlink" href="#app-views-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-App">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-App" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="axion_smarty-main" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="AuthUser.html" class="btn btn-neutral float-right" title="AuthUser package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

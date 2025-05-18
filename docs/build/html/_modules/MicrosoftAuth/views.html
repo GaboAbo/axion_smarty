@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicrosoftAuth.views &mdash; AxionDocs  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            AxionDocs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">axion_smarty-main</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AxionDocs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MicrosoftAuth.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MicrosoftAuth.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">environ</span><span class="o">,</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">msal</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfidentialClientApplication</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpRequest</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">login</span><span class="p">,</span> <span class="n">logout</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_microsoft_token</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">AuthUser.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Engineer</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticationFailed</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">Env</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">str</span><span class="p">(</span><span class="s1">&#39;ENV&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;development&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;production&#39;</span><span class="p">:</span>
+    <span class="n">environ</span><span class="o">.</span><span class="n">Env</span><span class="o">.</span><span class="n">read_env</span><span class="p">()</span>
+
+<span class="c1"># Environment Variables</span>
+<span class="n">TENANT</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s2">&quot;MICROSOFT_TENANT&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">CLIENT_ID</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s2">&quot;MICROSOFT_CLIENT_ID&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">CLIENT_SECRET</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s2">&quot;MICROSOFT_CLIENT_SECRET&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">REDIRECT_URI</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s2">&quot;MICROSOFT_REDIRECT_URI&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">_confidential_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="set_client">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.views.set_client">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_client</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">_confidential_client</span>
+    <span class="k">if</span> <span class="n">_confidential_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_confidential_client</span> <span class="o">=</span> <span class="n">ConfidentialClientApplication</span><span class="p">(</span>
+            <span class="n">CLIENT_ID</span><span class="p">,</span>
+            <span class="n">CLIENT_SECRET</span><span class="p">,</span>
+            <span class="n">authority</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;https://login.microsoftonline.com/</span><span class="si">{</span><span class="n">TENANT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_confidential_client</span></div>
+
+
+
+<div class="viewcode-block" id="microsoft_login">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.views.microsoft_login">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">microsoft_login</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">HttpRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpResponseRedirect</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initiates the Microsoft OAuth2 login flow based on the application type.</span>
+<span class="sd">    Selects between ConfidentialClientApplication or PublicClientApplication </span>
+<span class="sd">    depending on the app_type parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The Django HTTP request object.</span>
+<span class="sd">        app_type (str): The type of the application. Use &#39;server&#39; for server-side apps</span>
+<span class="sd">                        (ConfidentialClientApplication) or &#39;mobile&#39; for client-side apps</span>
+<span class="sd">                        (PublicClientApplication). Default is &#39;server&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JsonResponse: A JSON response containing the authorization URL.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: If required environment variables are missing.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Ensure `MICROSOFT_CLIENT_ID`, `MICROSOFT_CLIENT_SECRET`, and `MICROSOFT_TENANT` are set in the environment.</span>
+<span class="sd">        - `server` app type requires `ConfidentialClientApplication` (with client secret).</span>
+<span class="sd">        - `mobile` app type uses `PublicClientApplication` (no client secret).</span>
+<span class="sd">        - The `auth_flow` stored in the session should not contain sensitive information.</span>
+<span class="sd">        - Consider storing the redirect URI in an environment variable instead of hardcoding it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="n">_confidential_client</span> <span class="o">=</span> <span class="n">set_client</span><span class="p">()</span>
+    <span class="n">auth_flow</span> <span class="o">=</span> <span class="n">_confidential_client</span><span class="o">.</span><span class="n">initiate_auth_code_flow</span><span class="p">(</span>
+        <span class="n">scopes</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;api://</span><span class="si">{</span><span class="n">CLIENT_ID</span><span class="si">}</span><span class="s2">/User.Read&quot;</span><span class="p">],</span>
+        <span class="n">redirect_uri</span><span class="o">=</span><span class="n">REDIRECT_URI</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">auth_url</span> <span class="o">=</span> <span class="n">auth_flow</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auth_uri&quot;</span><span class="p">)</span>
+
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;auth_flow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auth_flow</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">auth_url</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="microsoft_callback">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.views.microsoft_callback">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">microsoft_callback</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">_confidential_client</span> <span class="o">=</span> <span class="n">set_client</span><span class="p">()</span>
+    <span class="n">auth_flow</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auth_flow&quot;</span><span class="p">)</span>
+    <span class="n">auth_response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_confidential_client</span><span class="o">.</span><span class="n">acquire_token_by_auth_code_flow</span><span class="p">(</span>
+        <span class="n">auth_flow</span><span class="p">,</span> <span class="n">auth_response</span><span class="p">,</span>
+        <span class="n">scopes</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;api://</span><span class="si">{</span><span class="n">CLIENT_ID</span><span class="si">}</span><span class="s2">/User.Read&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span> <span class="ow">or</span> <span class="s2">&quot;id_token_claims&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Microsoft callback failed: Missing id_token_claims or result is empty. Result: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Error al autenticar con Microsoft&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;access_token&quot;</span><span class="p">)</span>
+    <span class="n">claims</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id_token_claims&quot;</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">validation_result</span> <span class="o">=</span> <span class="n">validate_microsoft_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">validation_result</span> <span class="o">==</span> <span class="s2">&quot;success&quot;</span><span class="p">:</span>
+            <span class="n">user_email</span> <span class="o">=</span> <span class="n">claims</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;preferred_username&quot;</span><span class="p">)</span>
+            <span class="n">full_name</span> <span class="o">=</span> <span class="n">claims</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">AuthenticationFailed</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Microsoft callback failed: Token not valid. Result: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Error al validar el token: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">Engineer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">user_email</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;user_email&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_email</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;full_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_name</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span>
+
+        <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;home&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="microsoft_logout">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.views.microsoft_logout">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">microsoft_logout</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">HttpRequest</span><span class="p">,</span> <span class="n">app_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;server&quot;</span><span class="p">):</span>
+    <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">app_type</span> <span class="o">==</span> <span class="s2">&quot;server&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">app_type</span> <span class="o">==</span> <span class="s2">&quot;mobile&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="error">
+<a class="viewcode-back" href="../../MicrosoftAuth.html#MicrosoftAuth.views.error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;error.html&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Robert.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
