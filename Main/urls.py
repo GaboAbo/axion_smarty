@@ -17,12 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from oauth2_provider import urls as oauth2_urls
+from django.http import HttpResponseRedirect
 
+
+def redirect_to_docs(request):
+    return HttpResponseRedirect("docs-mobile/index.html")
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', include("App.urls")),
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path("typedocs/", redirect_to_docs),
 ]
