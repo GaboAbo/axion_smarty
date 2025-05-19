@@ -10,6 +10,6 @@ router.register(r"model-device", DeviceModelViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 
-    path('get-all-devices/', GetAllDevices, name='get_all_devices'),
+    path('get-all-devices/', GetAllDevices, name='getAllDevices'),
     path('filter-device/', FilterDevice, name='filter_device'),
 ]
