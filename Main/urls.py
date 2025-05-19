@@ -27,5 +27,5 @@ urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', include("App.urls")),
-    path("typedocs/", redirect_to_docs),
+    path("doc-mobile/", redirect_to_docs),
 ]
