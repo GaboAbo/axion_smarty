@@ -21,7 +21,7 @@ from django.http import HttpResponseRedirect
 
 
 def redirect_to_docs(request):
-    return HttpResponseRedirect("docs-mobile/index.html")
+    return HttpResponseRedirect("/static/docs-mobile/index.html")
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
